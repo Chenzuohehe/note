@@ -8,7 +8,7 @@
 
 import UIKit
 
-class NewNoteViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, FSCalendarDataSource, FSCalendarDelegate, UIGestureRecognizerDelegate {
+class NewNoteViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, FSCalendarDataSource, FSCalendarDelegate, UIGestureRecognizerDelegate, UITextFieldDelegate {
 
     @IBOutlet weak var calendar: FSCalendar!
     @IBOutlet weak var tableView: UITableView!
@@ -29,10 +29,18 @@ class NewNoteViewController: UIViewController, UITableViewDelegate, UITableViewD
         
         self.view.addGestureRecognizer(self.scopeGesture)
         self.tableView.panGestureRecognizer.require(toFail: self.scopeGesture)
+        self.tableView.tableFooterView = UIView()
         self.calendar.scope = .week
-//        self.calendar.accessibilityIdentifier = "calendar"
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(NewNoteViewController.keyboardWillShow), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
     }
+    
+    func keyboardWillShow(notification:NSNotification) {
+        self.calendar.setScope(.week, animated: true)
+    }
+    
 
+//MARK:- UIGestureRecognizerDelegate
     func gestureRecognizerShouldBegin(_ gestureRecognizer: UIGestureRecognizer) -> Bool {
         let shouldBegin = self.tableView.contentOffset.y <= -self.tableView.contentInset.top
         if shouldBegin {
@@ -46,12 +54,17 @@ class NewNoteViewController: UIViewController, UITableViewDelegate, UITableViewD
         }
         return shouldBegin
     }
-    
+
+//MARK:- FSCalendarDelegate
     func calendar(_ calendar: FSCalendar, boundingRectWillChange bounds: CGRect, animated: Bool) {
         self.calendarHight.constant = bounds.height
         self.view.layoutIfNeeded()
+        if self.calendar.scope == .month {
+            self.hiddenTextField()
+        }
     }
     
+//MARK:- tableViewDelegate/dataSoure
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
@@ -60,20 +73,35 @@ class NewNoteViewController: UIViewController, UITableViewDelegate, UITableViewD
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-
-        let identifys = ["titleCell", "cell", "timeCell","switchCell"];
         
-        if indexPath.row == 0 {
-            let cell = tableView.dequeueReusableCell(withIdentifier: identifys[0])!
+        let identifys = ["titleCell", "cell", "timeCell","switchCell"];
+        switch indexPath.row {
+        case 0:
+            let cell = tableView.dequeueReusableCell(withIdentifier: identifys[0])! as! TitleTableViewCell
+            cell.titleTextField.delegate = self
             return cell
-        }else if indexPath.row == 1{
+        case 1, 4:
             let cell = tableView.dequeueReusableCell(withIdentifier: identifys[1])!
+            if indexPath.row == 1 {
+                cell.textLabel?.text = "内容"
+            }else{
+                cell.textLabel?.text = "语音"
+            }
+            
             return cell
-        }else if indexPath.row == 2{
-            let cell = tableView.dequeueReusableCell(withIdentifier: identifys[2])!
+        case 2:
+            let cell = tableView.dequeueReusableCell(withIdentifier: identifys[2])! as! TimeTableViewCell
+            
             return cell
-        }else{
-            let cell = tableView.dequeueReusableCell(withIdentifier: identifys[3])!
+        default:
+            
+            let cell = tableView.dequeueReusableCell(withIdentifier: identifys[3])! as! SwitchTableViewCell
+            if indexPath.row == 3 {
+                cell.switchTitleLabel.text = "是否添加到系统日历"
+            }else{
+                cell.switchTitleLabel.text = "是否添加地理标注"
+            }
+            
             return cell
         }
     }
@@ -81,5 +109,23 @@ class NewNoteViewController: UIViewController, UITableViewDelegate, UITableViewD
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
     }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        self.hiddenTextField()
+        return true
+    }
+    
+//MARK:- action
+    
+    @IBAction func touchView(_ sender: UITapGestureRecognizer) {
+        self.hiddenTextField()
+    }
+    
+    func hiddenTextField() {
+        let cellIndex = NSIndexPath(row: 0, section: 0) as IndexPath
+        let cell = self.tableView.cellForRow(at: cellIndex) as! TitleTableViewCell
+        cell.titleTextField.resignFirstResponder()
+    }
+    
 }
 

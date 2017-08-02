@@ -12,7 +12,6 @@ class TitleTableViewCell: UITableViewCell {
     @IBOutlet weak var titleTextField: UITextField!
     @IBOutlet weak var titleLabel: UILabel!
     
-    
     override func awakeFromNib() {
         super.awakeFromNib()
         
@@ -22,5 +21,7 @@ class TitleTableViewCell: UITableViewCell {
         super.setSelected(selected, animated: animated)
         
     }
+    
+    
 
 }
