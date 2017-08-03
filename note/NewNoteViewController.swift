@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SnapKit
 
 class NewNoteViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, FSCalendarDataSource, FSCalendarDelegate, UIGestureRecognizerDelegate, UITextFieldDelegate {
 
@@ -23,6 +24,9 @@ class NewNoteViewController: UIViewController, UITableViewDelegate, UITableViewD
         panGesture.maximumNumberOfTouches = 2
         return panGesture
     }()
+    
+    let touch = UITapGestureRecognizer()
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -54,7 +58,7 @@ class NewNoteViewController: UIViewController, UITableViewDelegate, UITableViewD
         }
         return shouldBegin
     }
-
+    
 //MARK:- FSCalendarDelegate
     func calendar(_ calendar: FSCalendar, boundingRectWillChange bounds: CGRect, animated: Bool) {
         self.calendarHight.constant = bounds.height
@@ -106,10 +110,30 @@ class NewNoteViewController: UIViewController, UITableViewDelegate, UITableViewD
         }
     }
     
+//    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+//        self.showTimePicker()
+//    }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
+        print("111")
     }
     
+    let timePickerView = UIView()
+    
+    func showTimePicker() {
+        
+        self.timePickerView.snp.makeConstraints { (make) in
+            make.bottom.equalTo(self.view)
+            make.left.equalTo(self.view)
+            make.right.equalTo(self.view)
+            make.height.equalTo(300)
+        }
+        self.timePickerView.backgroundColor = UIColor.yellow
+        UIView.animate(withDuration: 0.3) { 
+            self.view.addSubview(self.timePickerView)
+        }
+    }
+    
+//MARK:- UITextField
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         self.hiddenTextField()
         return true
@@ -117,7 +141,7 @@ class NewNoteViewController: UIViewController, UITableViewDelegate, UITableViewD
     
 //MARK:- action
     
-    @IBAction func touchView(_ sender: UITapGestureRecognizer) {
+    func touchtouch(_ sender :UITapGestureRecognizer) {
         self.hiddenTextField()
     }
     

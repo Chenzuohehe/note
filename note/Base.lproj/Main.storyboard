@@ -105,7 +105,7 @@
                                     <outlet property="delegate" destination="0RN-Jo-cli" id="MyW-vE-JbU"/>
                                 </connections>
                             </view>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="50" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="pmm-il-JDb">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" keyboardDismissMode="onDrag" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="50" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="pmm-il-JDb">
                                 <rect key="frame" x="0.0" y="364" width="375" height="303"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
@@ -254,9 +254,6 @@
                             <constraint firstItem="ei2-tO-g4Y" firstAttribute="top" secondItem="p6E-nu-GpU" secondAttribute="bottom" id="oe4-h0-6jh"/>
                             <constraint firstAttribute="trailing" secondItem="pmm-il-JDb" secondAttribute="trailing" id="v7p-U5-N8f"/>
                         </constraints>
-                        <connections>
-                            <outletCollection property="gestureRecognizers" destination="7KC-uT-Dqw" appends="YES" id="DF4-O3-jZh"/>
-                        </connections>
                     </view>
                     <navigationItem key="navigationItem" title="新建" id="9Pv-cg-tH7">
                         <barButtonItem key="rightBarButtonItem" title="保存" id="PaE-mT-H0r"/>
@@ -268,11 +265,6 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qq6-QL-IHP" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <tapGestureRecognizer id="7KC-uT-Dqw">
-                    <connections>
-                        <action selector="touchView:" destination="0RN-Jo-cli" id="rtM-u2-Xgb"/>
-                    </connections>
-                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="672.79999999999995" y="169.56521739130437"/>
         </scene>
