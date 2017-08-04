@@ -9,12 +9,11 @@
 import UIKit
 import SnapKit
 
-class NewNoteViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, FSCalendarDataSource, FSCalendarDelegate, UIGestureRecognizerDelegate, UITextFieldDelegate {
+class NewNoteViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, FSCalendarDataSource, FSCalendarDelegate, UIGestureRecognizerDelegate, UITextFieldDelegate,UIPickerViewDelegate,UIPickerViewDataSource, timePickerDelegate {
 
     @IBOutlet weak var calendar: FSCalendar!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var calendarHight: NSLayoutConstraint!
-    
     
     lazy var scopeGesture: UIPanGestureRecognizer = {
         [unowned self] in
@@ -26,7 +25,6 @@ class NewNoteViewController: UIViewController, UITableViewDelegate, UITableViewD
     }()
     
     let touch = UITapGestureRecognizer()
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -66,6 +64,7 @@ class NewNoteViewController: UIViewController, UITableViewDelegate, UITableViewD
         if self.calendar.scope == .month {
             self.hiddenTextField()
         }
+        
     }
     
 //MARK:- tableViewDelegate/dataSoure
@@ -110,30 +109,73 @@ class NewNoteViewController: UIViewController, UITableViewDelegate, UITableViewD
         }
     }
     
-//    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//        self.showTimePicker()
-//    }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        print("111")
+        self.hiddenTextField()
+        self.showTimePicker()
     }
     
-    let timePickerView = UIView()
+    let timePicker = Bundle.main.loadNibNamed("TimePickerView", owner: nil, options: nil)?.last as! TimePickerView
     
     func showTimePicker() {
+
+        self.view.addSubview(self.timePicker)
+        let toucTap = UITapGestureRecognizer(target: self, action: #selector(hiddenTimePicker))
+        self.timePicker.addGestureRecognizer(toucTap)
         
-        self.timePickerView.snp.makeConstraints { (make) in
-            make.bottom.equalTo(self.view)
-            make.left.equalTo(self.view)
-            make.right.equalTo(self.view)
-            make.height.equalTo(300)
-        }
-        self.timePickerView.backgroundColor = UIColor.yellow
-        UIView.animate(withDuration: 0.3) { 
-            self.view.addSubview(self.timePickerView)
+        self.timePicker.delegate = self
+        
+        self.timePicker.frame = CGRect(x: 0, y: SCREEN_HEIGHT, width: SCREEN_WIDTH, height: SCREEN_HEIGHT)
+        UIView.animate(withDuration: 0.6) {
+            self.timePicker.snp.makeConstraints({ (make) in
+                make.edges.equalToSuperview()
+            })
+            self.view.layoutIfNeeded()
         }
     }
     
-//MARK:- UITextField
+    func getPickTime(_ startTime: Date, _ endTime: Date) {
+        print(startTime, endTime)
+    }
+    
+    func hiddenTimePicker() {
+        UIView.animate(withDuration: 0.6, animations: {
+            self.timePicker.frame = CGRect(x: 0, y: SCREEN_HEIGHT, width: SCREEN_WIDTH, height: 300)
+        }) { (success) in
+            self.timePicker.removeFromSuperview()
+        }
+    }
+    
+//MARK:- UIPickerViewDelegate/datasoure
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        return 3
+    }
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        return 7
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, widthForComponent component: Int) -> CGFloat {
+        return SCREEN_WIDTH / 8
+    }
+    
+//    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+//        return "123"
+//    }
+    
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        self.hiddenTimePicker()
+    }
+    
+    
+    
+    func pickerView(_ pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusing view: UIView?) -> UIView {
+        let titleLabel = UILabel(frame: CGRect(x: 0, y: 0, width: SCREEN_WIDTH / 8 - 5, height: 50))
+        titleLabel.backgroundColor = UIColor.red
+        titleLabel.font = UIFont.systemFont(ofSize: 14)
+        titleLabel.textColor = noteColor(red: 86, green: 86, blue: 86)
+        return titleLabel
+    }
+    
+//MARK:- UITextFieldDelegate
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         self.hiddenTextField()
         return true
@@ -141,14 +183,12 @@ class NewNoteViewController: UIViewController, UITableViewDelegate, UITableViewD
     
 //MARK:- action
     
-    func touchtouch(_ sender :UITapGestureRecognizer) {
-        self.hiddenTextField()
-    }
-    
     func hiddenTextField() {
         let cellIndex = NSIndexPath(row: 0, section: 0) as IndexPath
         let cell = self.tableView.cellForRow(at: cellIndex) as! TitleTableViewCell
         cell.titleTextField.resignFirstResponder()
+        
+//        self.timePickerView.removeFromSuperview()
     }
     
 }
