@@ -14,3 +14,14 @@ let SCREEN_HEIGHT = UIScreen.main.bounds.size.height;
 func noteColor(red:CGFloat, green:CGFloat, blue:CGFloat) -> UIColor {
     return UIColor(red: red/255.0, green: green/255.0, blue: blue/255.0, alpha: 0.1)
 }
+
+
+func getLocalDate(_ date:Date) -> Date {
+    
+    let localTimeZone = NSTimeZone.local
+    let localGMTOfset = localTimeZone.secondsFromGMT(for: date)
+    
+    let dateNow = NSDate(timeInterval: TimeInterval(localGMTOfset), since: date)
+    return dateNow as Date
+    
+}

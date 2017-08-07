@@ -134,7 +134,11 @@ class NewNoteViewController: UIViewController, UITableViewDelegate, UITableViewD
     }
     
     func getPickTime(_ startTime: Date, _ endTime: Date) {
-        print(startTime, endTime)
+        
+        getLocalDate(startTime)
+        print("开始", startTime,"结束" , endTime)
+        
+        
     }
     
     func hiddenTimePicker() {

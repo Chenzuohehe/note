@@ -22,6 +22,7 @@ class TimePickerView: UIView {
     
     @IBAction func timeChanged(_ sender: UIDatePicker) {
         self.delegate?.getPickTime(self.startDatePicker.date, self.endDatePicker.date)
+        
     }
     
 }
