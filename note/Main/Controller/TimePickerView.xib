@@ -21,11 +21,11 @@
                     <gestureRecognizers/>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="EF6-ho-H9f">
-                    <rect key="frame" x="0.0" y="467" width="375" height="200"/>
+                    <rect key="frame" x="0.0" y="437" width="375" height="230"/>
                     <subviews>
                         <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="time" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="Pj2-pK-xlK">
-                            <rect key="frame" x="0.0" y="1" width="172" height="199"/>
-                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <rect key="frame" x="0.0" y="31" width="172" height="199"/>
+                            <color key="backgroundColor" red="0.98039215686274506" green="0.98039215686274506" blue="0.98039215686274506" alpha="1" colorSpace="calibratedRGB"/>
                             <date key="date" timeIntervalSinceReferenceDate="523445145.37895697">
                                 <!--2017-08-03 09:25:45 +0000-->
                             </date>
@@ -34,10 +34,9 @@
                             </connections>
                         </datePicker>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="~" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eLS-5R-UeL">
-                            <rect key="frame" x="172.5" y="1" width="29" height="199"/>
-                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <rect key="frame" x="172.5" y="31" width="29" height="199"/>
+                            <color key="backgroundColor" red="0.98039215686274506" green="0.98039215686274506" blue="0.98039215686274506" alpha="1" colorSpace="calibratedRGB"/>
                             <constraints>
-                                <constraint firstAttribute="height" constant="199" id="cpu-Ar-cws"/>
                                 <constraint firstAttribute="width" constant="29" id="hHx-zx-jCp"/>
                             </constraints>
                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -45,8 +44,8 @@
                             <nil key="highlightedColor"/>
                         </label>
                         <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="time" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="oNI-uZ-A80">
-                            <rect key="frame" x="202" y="1" width="172.5" height="199"/>
-                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <rect key="frame" x="202" y="31" width="172.5" height="199"/>
+                            <color key="backgroundColor" red="0.98039215686274506" green="0.98039215686274506" blue="0.98039215686274506" alpha="1" colorSpace="calibratedRGB"/>
                             <date key="date" timeIntervalSinceReferenceDate="523445145.37895697">
                                 <!--2017-08-03 09:25:45 +0000-->
                             </date>
@@ -62,23 +61,23 @@
                             </constraints>
                         </view>
                     </subviews>
-                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <color key="backgroundColor" red="0.98039215690000003" green="0.98039215690000003" blue="0.98039215690000003" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
                         <constraint firstAttribute="trailing" secondItem="DQV-bf-j1k" secondAttribute="trailing" id="2Ue-Q7-UcJ"/>
                         <constraint firstItem="Pj2-pK-xlK" firstAttribute="leading" secondItem="EF6-ho-H9f" secondAttribute="leading" id="2n1-6C-B8g"/>
                         <constraint firstItem="DQV-bf-j1k" firstAttribute="top" secondItem="EF6-ho-H9f" secondAttribute="top" id="9Te-T4-8Ay"/>
                         <constraint firstAttribute="trailing" secondItem="oNI-uZ-A80" secondAttribute="trailing" constant="0.5" id="D8I-hT-Pt4"/>
                         <constraint firstAttribute="bottom" secondItem="Pj2-pK-xlK" secondAttribute="bottom" id="H8v-2n-jmF"/>
-                        <constraint firstItem="Pj2-pK-xlK" firstAttribute="top" secondItem="EF6-ho-H9f" secondAttribute="top" constant="1" id="WlA-Eg-8sP"/>
+                        <constraint firstItem="Pj2-pK-xlK" firstAttribute="top" secondItem="EF6-ho-H9f" secondAttribute="top" constant="31" id="WlA-Eg-8sP"/>
                         <constraint firstItem="DQV-bf-j1k" firstAttribute="leading" secondItem="EF6-ho-H9f" secondAttribute="leading" id="XKN-HN-47p"/>
                         <constraint firstAttribute="bottom" secondItem="eLS-5R-UeL" secondAttribute="bottom" id="XLe-Xb-FTA"/>
                         <constraint firstItem="oNI-uZ-A80" firstAttribute="leading" secondItem="eLS-5R-UeL" secondAttribute="trailing" constant="0.5" id="bVB-ox-lhN"/>
-                        <constraint firstAttribute="height" constant="200" id="fHu-2D-QiM"/>
+                        <constraint firstAttribute="height" constant="230" id="fHu-2D-QiM"/>
                         <constraint firstItem="oNI-uZ-A80" firstAttribute="width" secondItem="Pj2-pK-xlK" secondAttribute="width" id="nAn-sc-Hnj"/>
                         <constraint firstAttribute="bottom" secondItem="oNI-uZ-A80" secondAttribute="bottom" id="pKH-LK-fZk"/>
-                        <constraint firstItem="eLS-5R-UeL" firstAttribute="top" secondItem="EF6-ho-H9f" secondAttribute="top" constant="1" id="u9z-9W-39m"/>
+                        <constraint firstItem="eLS-5R-UeL" firstAttribute="top" secondItem="EF6-ho-H9f" secondAttribute="top" constant="31" id="u9z-9W-39m"/>
                         <constraint firstItem="eLS-5R-UeL" firstAttribute="leading" secondItem="Pj2-pK-xlK" secondAttribute="trailing" constant="0.5" id="wCc-6q-Oox"/>
-                        <constraint firstItem="oNI-uZ-A80" firstAttribute="top" secondItem="EF6-ho-H9f" secondAttribute="top" constant="1" id="xTw-Kt-A8D"/>
+                        <constraint firstItem="oNI-uZ-A80" firstAttribute="top" secondItem="EF6-ho-H9f" secondAttribute="top" constant="31" id="xTw-Kt-A8D"/>
                         <constraint firstItem="oNI-uZ-A80" firstAttribute="width" secondItem="Pj2-pK-xlK" secondAttribute="width" id="zsW-Jd-IHU"/>
                     </constraints>
                 </view>

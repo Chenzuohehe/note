@@ -4,6 +4,7 @@ use_frameworks!
 def pods
     pod 'SnapKit', '~> 3.1.2'
     pod 'FSCalendar', '~> 2.7.4'
+    pod 'MBProgressHUD', '~> 1.0.0'
 end
 
 target 'note' do

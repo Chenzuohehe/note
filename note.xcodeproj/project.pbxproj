@@ -16,6 +16,8 @@
 		4E3967001F25DDBE0071EA7B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4E3966FE1F25DDBE0071EA7B /* LaunchScreen.storyboard */; };
 		4E39670B1F25DDBE0071EA7B /* noteTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E39670A1F25DDBE0071EA7B /* noteTests.swift */; };
 		4E3967161F25DDBE0071EA7B /* noteUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E3967151F25DDBE0071EA7B /* noteUITests.swift */; };
+		4E4AE1251F38465700B916F9 /* ContentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E4AE1231F38465700B916F9 /* ContentViewController.swift */; };
+		4E4AE1281F3954DF00B916F9 /* NoteModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E4AE1271F3954DF00B916F9 /* NoteModel.swift */; };
 		4EA246101F2ED825008AD5C0 /* NewNoteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EA2460F1F2ED824008AD5C0 /* NewNoteViewController.swift */; };
 		4EA246121F301C1B008AD5C0 /* TitleTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EA246111F301C1B008AD5C0 /* TitleTableViewCell.swift */; };
 		4EA246141F302313008AD5C0 /* TimeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EA246131F302313008AD5C0 /* TimeTableViewCell.swift */; };
@@ -57,6 +59,8 @@
 		4E3967111F25DDBE0071EA7B /* noteUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = noteUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		4E3967151F25DDBE0071EA7B /* noteUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = noteUITests.swift; sourceTree = "<group>"; };
 		4E3967171F25DDBE0071EA7B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		4E4AE1231F38465700B916F9 /* ContentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentViewController.swift; sourceTree = "<group>"; };
+		4E4AE1271F3954DF00B916F9 /* NoteModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NoteModel.swift; sourceTree = "<group>"; };
 		4E4FEE031F27635000135A2B /* note-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "note-Bridging-Header.h"; path = "../note-Bridging-Header.h"; sourceTree = "<group>"; };
 		4EA2460F1F2ED824008AD5C0 /* NewNoteViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NewNoteViewController.swift; path = ../../NewNoteViewController.swift; sourceTree = "<group>"; };
 		4EA246111F301C1B008AD5C0 /* TitleTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TitleTableViewCell.swift; path = ../../TitleTableViewCell.swift; sourceTree = "<group>"; };
@@ -180,6 +184,7 @@
 			children = (
 				4E3966F71F25DDBE0071EA7B /* ViewController.swift */,
 				4EA2460F1F2ED824008AD5C0 /* NewNoteViewController.swift */,
+				4E4AE1231F38465700B916F9 /* ContentViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -187,6 +192,7 @@
 		4EA246D81F31A58A008AD5C0 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				4E4AE1271F3954DF00B916F9 /* NoteModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -411,6 +417,8 @@
 				4EA246121F301C1B008AD5C0 /* TitleTableViewCell.swift in Sources */,
 				4E3966F81F25DDBE0071EA7B /* ViewController.swift in Sources */,
 				4E0728C51F344B4E003FBB12 /* TimePickerView.swift in Sources */,
+				4E4AE1251F38465700B916F9 /* ContentViewController.swift in Sources */,
+				4E4AE1281F3954DF00B916F9 /* NoteModel.swift in Sources */,
 				4E3966F61F25DDBE0071EA7B /* AppDelegate.swift in Sources */,
 				4EA246101F2ED825008AD5C0 /* NewNoteViewController.swift in Sources */,
 				4EA246141F302313008AD5C0 /* TimeTableViewCell.swift in Sources */,

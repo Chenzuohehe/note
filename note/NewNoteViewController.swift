@@ -9,11 +9,26 @@
 import UIKit
 import SnapKit
 
-class NewNoteViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, FSCalendarDataSource, FSCalendarDelegate, UIGestureRecognizerDelegate, UITextFieldDelegate,UIPickerViewDelegate,UIPickerViewDataSource, timePickerDelegate {
+class NewNoteViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, FSCalendarDataSource, FSCalendarDelegate, UIGestureRecognizerDelegate, UITextFieldDelegate, timePickerDelegate {
 
     @IBOutlet weak var calendar: FSCalendar!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var calendarHight: NSLayoutConstraint!
+    
+    var newNote = NoteModel()
+    
+    enum indexPathName:Int {
+        case titleIndex = 0
+        case contentIndex
+        case timeIndex
+        case calendarIndex
+        case voiceIndex
+        case addressIndex
+    }
+    
+    func indexName(_ name:indexPathName) -> IndexPath {
+        return IndexPath(row: name.rawValue, section: 0)
+    }
     
     lazy var scopeGesture: UIPanGestureRecognizer = {
         [unowned self] in
@@ -78,28 +93,33 @@ class NewNoteViewController: UIViewController, UITableViewDelegate, UITableViewD
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let identifys = ["titleCell", "cell", "timeCell","switchCell"];
-        switch indexPath.row {
-        case 0:
+        
+        switch indexPath {
+        case indexName(.titleIndex):
             let cell = tableView.dequeueReusableCell(withIdentifier: identifys[0])! as! TitleTableViewCell
             cell.titleTextField.delegate = self
+            cell.titleTextField.addTarget(self, action: #selector(saveTitle(_:)), for: .editingChanged)
+            
             return cell
-        case 1, 4:
+        case indexName(.contentIndex), indexName(.voiceIndex):
             let cell = tableView.dequeueReusableCell(withIdentifier: identifys[1])!
-            if indexPath.row == 1 {
-                cell.textLabel?.text = "内容"
+            if indexPath == indexName(.contentIndex) {
+                if self.newNote.content.isEmpty {
+                    cell.textLabel?.text = "内容"
+                }else{
+                    cell.textLabel?.text = self.newNote.content
+                }
             }else{
                 cell.textLabel?.text = "语音"
             }
-            
             return cell
-        case 2:
+        case indexName(.timeIndex):
             let cell = tableView.dequeueReusableCell(withIdentifier: identifys[2])! as! TimeTableViewCell
-            
             return cell
         default:
             
             let cell = tableView.dequeueReusableCell(withIdentifier: identifys[3])! as! SwitchTableViewCell
-            if indexPath.row == 3 {
+            if indexPath == indexName(.calendarIndex) {
                 cell.switchTitleLabel.text = "是否添加到系统日历"
             }else{
                 cell.switchTitleLabel.text = "是否添加地理标注"
@@ -111,7 +131,25 @@ class NewNoteViewController: UIViewController, UITableViewDelegate, UITableViewD
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         self.hiddenTextField()
-        self.showTimePicker()
+        switch indexPath {
+        case indexName(.contentIndex):
+            let nextViewController = ContentViewController()
+            nextViewController.changText = { [weak self] (content:String) -> () in
+                if let weakself = self {
+                    weakself.newNote.content = content
+                    self?.tableView.reloadRows(at: [indexPath], with: .fade)
+                }
+            }
+            nextViewController.view.backgroundColor = UIColor.white
+            nextViewController.textView.text = self.newNote.content
+            self.navigationController?.pushViewController(nextViewController, animated: true)
+        case indexName(.timeIndex):
+            self.showTimePicker()
+        case indexName(.voiceIndex):
+            print("语音")
+        default:
+            break
+        }
     }
     
     let timePicker = Bundle.main.loadNibNamed("TimePickerView", owner: nil, options: nil)?.last as! TimePickerView
@@ -135,10 +173,19 @@ class NewNoteViewController: UIViewController, UITableViewDelegate, UITableViewD
     
     func getPickTime(_ startTime: Date, _ endTime: Date) {
         
-        getLocalDate(startTime)
-        print("开始", startTime,"结束" , endTime)
-        
-        
+        if startTime > endTime {
+            makePost("开始时间必须小于结束时间", self.view)
+        }else{
+            let timeCell = self.tableView.cellForRow(at: indexName(.timeIndex)) as! TimeTableViewCell
+            let dateFormatter = DateFormatter()
+            dateFormatter.setLocalizedDateFormatFromTemplate("HH:mm")
+            let startTimeString = dateFormatter.string(from: startTime)
+            let endTimeString = dateFormatter.string(from: endTime)
+            
+            timeCell.detailTimeLabel.text = startTimeString + " ~ " + endTimeString
+            
+        }
+        print("开始", getLocalDate(startTime),"结束" , getLocalDate(endTime))
     }
     
     func hiddenTimePicker() {
@@ -149,50 +196,27 @@ class NewNoteViewController: UIViewController, UITableViewDelegate, UITableViewD
         }
     }
     
-//MARK:- UIPickerViewDelegate/datasoure
-    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        return 3
-    }
-    func numberOfComponents(in pickerView: UIPickerView) -> Int {
-        return 7
-    }
-    
-    func pickerView(_ pickerView: UIPickerView, widthForComponent component: Int) -> CGFloat {
-        return SCREEN_WIDTH / 8
-    }
-    
-//    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-//        return "123"
-//    }
-    
-    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        self.hiddenTimePicker()
-    }
-    
-    
-    
-    func pickerView(_ pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusing view: UIView?) -> UIView {
-        let titleLabel = UILabel(frame: CGRect(x: 0, y: 0, width: SCREEN_WIDTH / 8 - 5, height: 50))
-        titleLabel.backgroundColor = UIColor.red
-        titleLabel.font = UIFont.systemFont(ofSize: 14)
-        titleLabel.textColor = noteColor(red: 86, green: 86, blue: 86)
-        return titleLabel
-    }
     
 //MARK:- UITextFieldDelegate
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         self.hiddenTextField()
+        self.saveTitle(textField)
         return true
+    }
+    func saveTitle(_ sender:UITextField) {
+        self.newNote.title = sender.text!
+        print(sender.text!)
     }
     
 //MARK:- action
+    @IBAction func saveNewNote(_ sender: UIBarButtonItem) {
+        
+    }
     
     func hiddenTextField() {
         let cellIndex = NSIndexPath(row: 0, section: 0) as IndexPath
         let cell = self.tableView.cellForRow(at: cellIndex) as! TitleTableViewCell
         cell.titleTextField.resignFirstResponder()
-        
-//        self.timePickerView.removeFromSuperview()
     }
     
 }
