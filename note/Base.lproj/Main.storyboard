@@ -172,13 +172,16 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="时间" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="77X-OA-Rlf">
-                                                    <rect key="frame" x="15" y="-1" width="156" height="50.5"/>
+                                                    <rect key="frame" x="15" y="-1" width="50" height="50.5"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="50" id="6AD-Ev-4D3"/>
+                                                    </constraints>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="10:10 - 13:30" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="l3t-LK-aAs">
-                                                    <rect key="frame" x="171" y="0.0" width="156" height="50"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="l3t-LK-aAs">
+                                                    <rect key="frame" x="65" y="0.0" width="262" height="50"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -188,7 +191,6 @@
                                                 <constraint firstItem="l3t-LK-aAs" firstAttribute="leading" secondItem="77X-OA-Rlf" secondAttribute="trailing" id="8Zt-Ut-ywt"/>
                                                 <constraint firstAttribute="bottom" secondItem="l3t-LK-aAs" secondAttribute="bottom" constant="-0.5" id="9DP-Qr-E2j"/>
                                                 <constraint firstItem="77X-OA-Rlf" firstAttribute="top" secondItem="INe-KV-byy" secondAttribute="top" constant="-1" id="Nt6-1A-jVG"/>
-                                                <constraint firstItem="l3t-LK-aAs" firstAttribute="width" secondItem="77X-OA-Rlf" secondAttribute="width" id="PrL-jY-pyH"/>
                                                 <constraint firstAttribute="bottom" secondItem="77X-OA-Rlf" secondAttribute="bottom" id="UoR-jh-xBn"/>
                                                 <constraint firstItem="77X-OA-Rlf" firstAttribute="leading" secondItem="INe-KV-byy" secondAttribute="leading" constant="15" id="WaA-uR-3Ow"/>
                                                 <constraint firstItem="l3t-LK-aAs" firstAttribute="top" secondItem="INe-KV-byy" secondAttribute="top" id="jhP-sw-qyR"/>
@@ -256,7 +258,11 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="新建" id="9Pv-cg-tH7">
-                        <barButtonItem key="rightBarButtonItem" title="保存" id="PaE-mT-H0r"/>
+                        <barButtonItem key="rightBarButtonItem" title="保存" id="PaE-mT-H0r">
+                            <connections>
+                                <action selector="saveNewNote:" destination="0RN-Jo-cli" id="1jh-jM-d2t"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="calendar" destination="ei2-tO-g4Y" id="lPv-hR-unh"/>
@@ -267,6 +273,24 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qq6-QL-IHP" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="672.79999999999995" y="169.56521739130437"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="dqf-vD-Haa">
+            <objects>
+                <viewController id="f63-yw-zOc" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="aRH-OY-6aW"/>
+                        <viewControllerLayoutGuide type="bottom" id="VH0-T4-k1b"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="p0I-Xe-nMl">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Tj4-c1-nyJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1409" y="170"/>
         </scene>
     </scenes>
 </document>

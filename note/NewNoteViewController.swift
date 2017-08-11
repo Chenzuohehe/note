@@ -79,8 +79,13 @@ class NewNoteViewController: UIViewController, UITableViewDelegate, UITableViewD
         if self.calendar.scope == .month {
             self.hiddenTextField()
         }
-        
     }
+    
+    func calendar(_ calendar: FSCalendar, didSelect date: Date, at monthPosition: FSCalendarMonthPosition) {
+        print(date)
+    }
+    
+    
     
 //MARK:- tableViewDelegate/dataSoure
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -147,6 +152,9 @@ class NewNoteViewController: UIViewController, UITableViewDelegate, UITableViewD
             self.showTimePicker()
         case indexName(.voiceIndex):
             print("语音")
+            
+            let nextViewController = VoiceViewController(nibName: "VoiceViewController", bundle: nil)
+            self.navigationController?.pushViewController(nextViewController, animated: true)
         default:
             break
         }
@@ -177,16 +185,30 @@ class NewNoteViewController: UIViewController, UITableViewDelegate, UITableViewD
             makePost("开始时间必须小于结束时间", self.view)
         }else{
             let timeCell = self.tableView.cellForRow(at: indexName(.timeIndex)) as! TimeTableViewCell
-            let dateFormatter = DateFormatter()
-            dateFormatter.setLocalizedDateFormatFromTemplate("HH:mm")
-            let startTimeString = dateFormatter.string(from: startTime)
-            let endTimeString = dateFormatter.string(from: endTime)
+            let minuteFormatter = DateFormatter()
+            minuteFormatter.setLocalizedDateFormatFromTemplate("HH:mm")
             
-            timeCell.detailTimeLabel.text = startTimeString + " ~ " + endTimeString
+            let dayFormatter = DateFormatter()
+            dayFormatter.setLocalizedDateFormatFromTemplate("MM-dd")
             
+            let startTimeString = minuteFormatter.string(from: startTime)
+            let endTimeString = minuteFormatter.string(from: endTime)
+            
+            var selectDay = Date()
+            
+            if (self.calendar.selectedDate != nil) {
+                selectDay = self.calendar.selectedDate!
+            }else{
+                selectDay = self.calendar.today!
+            }
+            
+            let time = dayFormatter.string(from: selectDay) + "  " + startTimeString + " ~ " + endTimeString
+            timeCell.detailTimeLabel.text = time
+            self.newNote.time = time
         }
-        print("开始", getLocalDate(startTime),"结束" , getLocalDate(endTime))
     }
+    
+    
     
     func hiddenTimePicker() {
         UIView.animate(withDuration: 0.6, animations: {
@@ -210,7 +232,7 @@ class NewNoteViewController: UIViewController, UITableViewDelegate, UITableViewD
     
 //MARK:- action
     @IBAction func saveNewNote(_ sender: UIBarButtonItem) {
-        
+        print(self.newNote)
     }
     
     func hiddenTextField() {
