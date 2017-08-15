@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		4E0728C51F344B4E003FBB12 /* TimePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E0728C41F344B4E003FBB12 /* TimePickerView.swift */; };
 		4E0728C71F344B5C003FBB12 /* TimePickerView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4E0728C61F344B5C003FBB12 /* TimePickerView.xib */; };
+		4E2E511C1F3DB38A00A680D5 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4E2E511B1F3DB38A00A680D5 /* MapKit.framework */; };
 		4E3966F61F25DDBE0071EA7B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E3966F51F25DDBE0071EA7B /* AppDelegate.swift */; };
 		4E3966F81F25DDBE0071EA7B /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E3966F71F25DDBE0071EA7B /* ViewController.swift */; };
 		4E3966FB1F25DDBE0071EA7B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4E3966F91F25DDBE0071EA7B /* Main.storyboard */; };
@@ -48,6 +49,7 @@
 /* Begin PBXFileReference section */
 		4E0728C41F344B4E003FBB12 /* TimePickerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TimePickerView.swift; path = ../Controller/TimePickerView.swift; sourceTree = "<group>"; };
 		4E0728C61F344B5C003FBB12 /* TimePickerView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = TimePickerView.xib; path = ../Controller/TimePickerView.xib; sourceTree = "<group>"; };
+		4E2E511B1F3DB38A00A680D5 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		4E3966F21F25DDBE0071EA7B /* note.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = note.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4E3966F51F25DDBE0071EA7B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		4E3966F71F25DDBE0071EA7B /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ViewController.swift; path = ../../ViewController.swift; sourceTree = "<group>"; };
@@ -81,6 +83,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4E2E511C1F3DB38A00A680D5 /* MapKit.framework in Frameworks */,
 				5C11B8D167E7B75D5359743C /* Pods_note.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -105,6 +108,7 @@
 		376736C38CC8BFF7A10127AD /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				4E2E511B1F3DB38A00A680D5 /* MapKit.framework */,
 				D629FD767CD6C7FF35B48805 /* Pods_note.framework */,
 			);
 			name = Frameworks;
@@ -301,6 +305,9 @@
 						SystemCapabilities = {
 							com.apple.InAppPurchase = {
 								enabled = 0;
+							};
+							com.apple.Maps.iOS = {
+								enabled = 1;
 							};
 						};
 					};

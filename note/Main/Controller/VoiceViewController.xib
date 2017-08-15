@@ -11,6 +11,9 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="VoiceViewController" customModule="note" customModuleProvider="target">
             <connections>
+                <outlet property="playButton" destination="tI2-wk-Zmp" id="oJv-rq-Clw"/>
+                <outlet property="startButton" destination="vBg-g3-YK4" id="Pm4-lO-8CX"/>
+                <outlet property="timeLabel" destination="BCq-ch-sFV" id="PeN-ZP-99a"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -20,14 +23,19 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vBg-g3-YK4">
-                    <rect key="frame" x="137" y="507" width="100" height="100"/>
+                    <rect key="frame" x="137" y="441" width="100" height="100"/>
                     <color key="backgroundColor" red="1" green="0.5" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="100" id="D7c-wm-uYQ"/>
                         <constraint firstAttribute="height" constant="100" id="KT9-FT-xLM"/>
                     </constraints>
-                    <state key="normal" title="start"/>
-                    <state key="selected" title="stop"/>
+                    <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <state key="normal" title="start">
+                        <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <state key="selected" title="stop">
+                        <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
                     <connections>
                         <action selector="recordingClick:" destination="-1" eventType="touchUpInside" id="lyI-rR-aoh"/>
                     </connections>
@@ -39,14 +47,28 @@
                         <constraint firstAttribute="height" constant="160" id="ZPL-fw-BA9"/>
                     </constraints>
                 </view>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tI2-wk-Zmp">
-                    <rect key="frame" x="298" y="577" width="46" height="30"/>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="00:00:00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BCq-ch-sFV">
+                    <rect key="frame" x="16" y="160" width="343" height="58"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="30" id="KuD-RR-DkM"/>
-                        <constraint firstAttribute="width" constant="46" id="vre-BY-buo"/>
+                        <constraint firstAttribute="height" constant="58" id="EZt-7U-Iyi"/>
                     </constraints>
-                    <state key="normal" title="play"/>
-                    <state key="selected" title="stop"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tI2-wk-Zmp">
+                    <rect key="frame" x="262" y="496" width="82" height="45"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="45" id="KuD-RR-DkM"/>
+                        <constraint firstAttribute="width" constant="82" id="vre-BY-buo"/>
+                    </constraints>
+                    <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <state key="normal" title="play">
+                        <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <state key="selected" title="stop">
+                        <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
                     <connections>
                         <action selector="playClick:" destination="-1" eventType="touchUpInside" id="8ZG-R6-5c0"/>
                     </connections>
@@ -55,13 +77,16 @@
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstItem="vBg-g3-YK4" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="23e-Mh-QhN"/>
-                <constraint firstAttribute="bottom" secondItem="tI2-wk-Zmp" secondAttribute="bottom" constant="60" id="GhT-jR-tDj"/>
-                <constraint firstAttribute="bottom" secondItem="vBg-g3-YK4" secondAttribute="bottom" constant="60" id="JuP-Jb-QRS"/>
+                <constraint firstItem="vBg-g3-YK4" firstAttribute="top" secondItem="QDk-o8-bLa" secondAttribute="bottom" constant="28" id="FcN-pX-uf2"/>
                 <constraint firstItem="QDk-o8-bLa" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="Mb5-HX-EgM"/>
                 <constraint firstItem="QDk-o8-bLa" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="RlD-hu-XNz"/>
                 <constraint firstItem="QDk-o8-bLa" firstAttribute="centerY" secondItem="i5M-Pr-FkT" secondAttribute="centerY" id="S1w-JZ-G7z"/>
+                <constraint firstItem="BCq-ch-sFV" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="16" id="UqO-PJ-4Fi"/>
+                <constraint firstAttribute="trailing" secondItem="BCq-ch-sFV" secondAttribute="trailing" constant="16" id="Ycw-tl-w07"/>
+                <constraint firstItem="QDk-o8-bLa" firstAttribute="top" secondItem="BCq-ch-sFV" secondAttribute="bottom" constant="35" id="ZV0-jX-NH5"/>
                 <constraint firstAttribute="trailing" secondItem="QDk-o8-bLa" secondAttribute="trailing" id="c5U-vh-JaC"/>
                 <constraint firstAttribute="trailing" secondItem="tI2-wk-Zmp" secondAttribute="trailing" constant="31" id="lxJ-B9-5U3"/>
+                <constraint firstItem="tI2-wk-Zmp" firstAttribute="top" secondItem="QDk-o8-bLa" secondAttribute="bottom" constant="83" id="zLE-hR-F0S"/>
             </constraints>
             <point key="canvasLocation" x="33.5" y="54.5"/>
         </view>
