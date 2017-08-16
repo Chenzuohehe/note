@@ -52,8 +52,10 @@ class ViewController: UIViewController,FSCalendarDataSource, FSCalendarDelegate,
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "itemCell", for: indexPath)
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "itemCell", for: indexPath) as! ItemCollectionViewCell
         cell.layer.cornerRadius = 4
+        cell.dayLabel.text = "2017.9.9"
+        
         return cell
     }
 }
