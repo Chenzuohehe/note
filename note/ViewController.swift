@@ -8,10 +8,12 @@
 
 import UIKit
 
-class ViewController: UIViewController,FSCalendarDataSource, FSCalendarDelegate, UIGestureRecognizerDelegate {
+class ViewController: UIViewController,FSCalendarDataSource, FSCalendarDelegate, UIGestureRecognizerDelegate, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
 
     @IBOutlet weak var calendar: FSCalendar!
     @IBOutlet weak var calendarConstraint: NSLayoutConstraint!
+    
+    @IBOutlet weak var mainCollectionView: UICollectionView!
     
     lazy var scopeGesture: UIPanGestureRecognizer = {
         //        [unowned self] in
@@ -27,6 +29,7 @@ class ViewController: UIViewController,FSCalendarDataSource, FSCalendarDelegate,
         self.view.addGestureRecognizer(self.scopeGesture)
 //        self.tableView.panGestureRecognizer.require(toFail: self.scopeGesture)
         self.calendar.scope = .month
+        
     }
 
     func calendar(_ calendar: FSCalendar, boundingRectWillChange bounds: CGRect, animated: Bool) {
@@ -34,19 +37,24 @@ class ViewController: UIViewController,FSCalendarDataSource, FSCalendarDelegate,
         self.view.layoutIfNeeded()
     }
 
-//    func gestureRecognizerShouldBegin(_ gestureRecognizer: UIGestureRecognizer) -> Bool {
-//        let shouldBegin = self.tableView.contentOffset.y <= -self.tableView.contentInset.top
-//        if shouldBegin {
-//            let velocity = self.scopeGesture.velocity(in: self.view)
-//            switch self.calendar.scope {
-//            case .month:
-//                return velocity.y < 0
-//            case .week:
-//                return velocity.y > 0
-//            }
-//        }
-//        return shouldBegin
-//    }
-
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        
+    }
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
+        return 1
+    }
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return 10
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return CGSize(width: (SCREEN_WIDTH - 30)/2, height: 80)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "itemCell", for: indexPath)
+        cell.layer.cornerRadius = 4
+        return cell
+    }
 }
 

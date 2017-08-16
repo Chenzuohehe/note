@@ -26,19 +26,6 @@ func getLocalDate(_ date:Date) -> Date {
 }
 
 func makePost(_ string:String, _ superView:UIView) {
-    /*
-     MBProgressHUD * HUD = [[MBProgressHUD alloc]initWithView:self.view.window];
-     HUD.removeFromSuperViewOnHide = YES;//隐藏的时候remove 防止内存泄漏
-     [self.view.window addSubview:HUD];
-     HUD.mode = MBProgressHUDModeText;
-     HUD.labelFont = [UIFont systemFontOfSize:14];
-     HUD.alpha = 0.7;
-     HUD.userInteractionEnabled = NO;
-     HUD.labelText = string;
-     
-     [HUD show:YES];
-     [HUD hide:YES afterDelay:1.2];
-     */
     
     let hub = MBProgressHUD.showAdded(to: superView, animated: true)
     hub.removeFromSuperViewOnHide = true
@@ -49,3 +36,5 @@ func makePost(_ string:String, _ superView:UIView) {
     hub.hide(animated: true, afterDelay: 1)
     
 }
+
+

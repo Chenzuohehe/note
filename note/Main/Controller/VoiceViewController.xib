@@ -12,6 +12,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="VoiceViewController" customModule="note" customModuleProvider="target">
             <connections>
                 <outlet property="playButton" destination="tI2-wk-Zmp" id="oJv-rq-Clw"/>
+                <outlet property="playProgressView" destination="1da-Tj-auv" id="C3A-Zc-Qaz"/>
                 <outlet property="startButton" destination="vBg-g3-YK4" id="Pm4-lO-8CX"/>
                 <outlet property="timeLabel" destination="BCq-ch-sFV" id="PeN-ZP-99a"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
@@ -30,10 +31,10 @@
                         <constraint firstAttribute="height" constant="100" id="KT9-FT-xLM"/>
                     </constraints>
                     <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                    <state key="normal" title="start">
+                    <state key="normal" title="录音">
                         <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
-                    <state key="selected" title="stop">
+                    <state key="selected" title="暂停">
                         <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
                     <connections>
@@ -47,6 +48,23 @@
                         <constraint firstAttribute="height" constant="160" id="ZPL-fw-BA9"/>
                     </constraints>
                 </view>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tI2-wk-Zmp">
+                    <rect key="frame" x="262" y="496" width="82" height="45"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="45" id="KuD-RR-DkM"/>
+                        <constraint firstAttribute="width" constant="82" id="vre-BY-buo"/>
+                    </constraints>
+                    <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <state key="normal" title="播放">
+                        <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <state key="selected" title="暂停">
+                        <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="playClick:" destination="-1" eventType="touchUpInside" id="8ZG-R6-5c0"/>
+                    </connections>
+                </button>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="00:00:00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BCq-ch-sFV">
                     <rect key="frame" x="16" y="160" width="343" height="58"/>
                     <constraints>
@@ -56,29 +74,33 @@
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tI2-wk-Zmp">
-                    <rect key="frame" x="262" y="496" width="82" height="45"/>
+                <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="1da-Tj-auv">
+                    <rect key="frame" x="16" y="234" width="343" height="2"/>
+                </progressView>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7aw-Aa-c2Z">
+                    <rect key="frame" x="31" y="496" width="82" height="45"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="45" id="KuD-RR-DkM"/>
-                        <constraint firstAttribute="width" constant="82" id="vre-BY-buo"/>
+                        <constraint firstAttribute="height" constant="45" id="2j8-jE-hEY"/>
+                        <constraint firstAttribute="width" constant="82" id="Uga-Ow-sMU"/>
                     </constraints>
-                    <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                    <state key="normal" title="play">
-                        <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                    </state>
-                    <state key="selected" title="stop">
+                    <state key="normal" title="重置">
                         <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
                     <connections>
-                        <action selector="playClick:" destination="-1" eventType="touchUpInside" id="8ZG-R6-5c0"/>
+                        <action selector="refresh:" destination="-1" eventType="touchUpInside" id="mve-GN-kKu"/>
                     </connections>
                 </button>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstItem="vBg-g3-YK4" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="23e-Mh-QhN"/>
+                <constraint firstItem="1da-Tj-auv" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="16" id="72V-BB-k5S"/>
+                <constraint firstAttribute="trailing" secondItem="1da-Tj-auv" secondAttribute="trailing" constant="16" id="7Xc-Ou-beB"/>
                 <constraint firstItem="vBg-g3-YK4" firstAttribute="top" secondItem="QDk-o8-bLa" secondAttribute="bottom" constant="28" id="FcN-pX-uf2"/>
+                <constraint firstItem="7aw-Aa-c2Z" firstAttribute="top" secondItem="QDk-o8-bLa" secondAttribute="bottom" constant="83" id="KaE-zk-e6W"/>
                 <constraint firstItem="QDk-o8-bLa" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="Mb5-HX-EgM"/>
+                <constraint firstItem="1da-Tj-auv" firstAttribute="top" secondItem="BCq-ch-sFV" secondAttribute="bottom" constant="16" id="O3b-oy-FI1"/>
+                <constraint firstItem="7aw-Aa-c2Z" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="31" id="QL7-cn-Brs"/>
                 <constraint firstItem="QDk-o8-bLa" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="RlD-hu-XNz"/>
                 <constraint firstItem="QDk-o8-bLa" firstAttribute="centerY" secondItem="i5M-Pr-FkT" secondAttribute="centerY" id="S1w-JZ-G7z"/>
                 <constraint firstItem="BCq-ch-sFV" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="16" id="UqO-PJ-4Fi"/>

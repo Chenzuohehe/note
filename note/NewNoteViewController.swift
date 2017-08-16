@@ -97,7 +97,7 @@ class NewNoteViewController: UIViewController, UITableViewDelegate, UITableViewD
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let identifys = ["titleCell", "cell", "timeCell","switchCell"];
+        let identifys = ["titleCell", "cell", "timeCell","recorderCell","switchCell"];
         
         switch indexPath {
         case indexName(.titleIndex):
@@ -106,24 +106,23 @@ class NewNoteViewController: UIViewController, UITableViewDelegate, UITableViewD
             cell.titleTextField.addTarget(self, action: #selector(saveTitle(_:)), for: .editingChanged)
             
             return cell
-        case indexName(.contentIndex), indexName(.voiceIndex):
+        case indexName(.contentIndex):
             let cell = tableView.dequeueReusableCell(withIdentifier: identifys[1])!
-            if indexPath == indexName(.contentIndex) {
-                if self.newNote.content.isEmpty {
-                    cell.textLabel?.text = "内容"
-                }else{
-                    cell.textLabel?.text = self.newNote.content
-                }
+            if self.newNote.content.isEmpty {
+                cell.textLabel?.text = "内容"
             }else{
-                cell.textLabel?.text = "语音"
+                cell.textLabel?.text = self.newNote.content
             }
             return cell
         case indexName(.timeIndex):
             let cell = tableView.dequeueReusableCell(withIdentifier: identifys[2])! as! TimeTableViewCell
             return cell
+        case indexName(.voiceIndex):
+            let cell = tableView.dequeueReusableCell(withIdentifier: identifys[3])! as! RecorderTableViewCell
+            return cell
         default:
             
-            let cell = tableView.dequeueReusableCell(withIdentifier: identifys[3])! as! SwitchTableViewCell
+            let cell = tableView.dequeueReusableCell(withIdentifier: identifys[4])! as! SwitchTableViewCell
             if indexPath == indexName(.calendarIndex) {
                 cell.switchTitleLabel.text = "是否添加到系统日历"
             }else{
