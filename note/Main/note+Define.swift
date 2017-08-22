@@ -37,4 +37,20 @@ func makePost(_ string:String, _ superView:UIView) {
     
 }
 
+func dayString(_ date:Date) -> String {
+    let dayFormatter = DateFormatter()
+    dayFormatter.setLocalizedDateFormatFromTemplate("MM-dd")
+    let dayString = dayFormatter.string(from: date)
+    return dayString
+}
 
+func timeString(_ startTime: Date, _ endTime: Date,_ selecDate:Date) -> String {
+    let minuteFormatter = DateFormatter()
+    minuteFormatter.setLocalizedDateFormatFromTemplate("HH:mm")
+    
+    let startTimeString = minuteFormatter.string(from: startTime)
+    let endTimeString = minuteFormatter.string(from: endTime)
+    let time = dayString(selecDate) + "  " + startTimeString + " ~ " + endTimeString
+    
+    return time
+}

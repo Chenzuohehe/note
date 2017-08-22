@@ -18,12 +18,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Override point for customization after application launch.
         self.window?.backgroundColor = UIColor.white
         
-        
-        
-        
-        
-        
-        
+        days = unArchiverDays()
+        print(days)
         return true
     }
     

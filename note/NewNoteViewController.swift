@@ -108,7 +108,7 @@ class NewNoteViewController: UIViewController, UITableViewDelegate, UITableViewD
             return cell
         case indexName(.contentIndex):
             let cell = tableView.dequeueReusableCell(withIdentifier: identifys[1])!
-            if self.newNote.content.isEmpty {
+            if self.newNote.content == nil {
                 cell.textLabel?.text = "内容"
             }else{
                 cell.textLabel?.text = self.newNote.content
@@ -184,15 +184,7 @@ class NewNoteViewController: UIViewController, UITableViewDelegate, UITableViewD
             makePost("开始时间必须小于结束时间", self.view)
         }else{
             let timeCell = self.tableView.cellForRow(at: indexName(.timeIndex)) as! TimeTableViewCell
-            let minuteFormatter = DateFormatter()
-            minuteFormatter.setLocalizedDateFormatFromTemplate("HH:mm")
-            
-            let dayFormatter = DateFormatter()
-            dayFormatter.setLocalizedDateFormatFromTemplate("MM-dd")
-            
-            let startTimeString = minuteFormatter.string(from: startTime)
-            let endTimeString = minuteFormatter.string(from: endTime)
-            
+
             var selectDay = Date()
             
             if (self.calendar.selectedDate != nil) {
@@ -201,13 +193,13 @@ class NewNoteViewController: UIViewController, UITableViewDelegate, UITableViewD
                 selectDay = self.calendar.today!
             }
             
-            let time = dayFormatter.string(from: selectDay) + "  " + startTimeString + " ~ " + endTimeString
+            let time = timeString(startTime, endTime, selectDay)
             timeCell.detailTimeLabel.text = time
-            self.newNote.time = time
+            
+            self.newNote.startDate = startTime
+            self.newNote.endDate = endTime
         }
     }
-    
-    
     
     func hiddenTimePicker() {
         UIView.animate(withDuration: 0.6, animations: {
@@ -232,6 +224,13 @@ class NewNoteViewController: UIViewController, UITableViewDelegate, UITableViewD
 //MARK:- action
     @IBAction func saveNewNote(_ sender: UIBarButtonItem) {
         print(self.newNote)
+        //这中间需要添加判断
+        
+        if self.newNote.title == nil {
+            makePost("请输入标题", self.view)
+            return
+        }
+        archiveNote()
     }
     
     func hiddenTextField() {
@@ -240,5 +239,35 @@ class NewNoteViewController: UIViewController, UITableViewDelegate, UITableViewD
         cell.titleTextField.resignFirstResponder()
     }
     
+    //判断days 里面是否有当前day
+    
+    func archiveNote() {
+        var selectDay = Date()
+        if (self.calendar.selectedDate != nil) {
+            selectDay = self.calendar.selectedDate!
+        }else{
+            selectDay = self.calendar.today!
+        }
+        self.newNote.creatDay = dayString(selectDay)
+        
+        
+        var hasDayModel = false
+        let today = DayModel()
+        
+        for day in days {
+            if day.day == dayString(Date()){
+                hasDayModel = true
+                day.notes!.append(self.newNote)
+            }
+        }
+        
+        if !hasDayModel {
+            today.day = dayString(selectDay)
+            today.notes = [self.newNote]
+            days.append(today)
+        }
+        archiverDays(days)
+        self.navigationController?.popViewController(animated: true)
+    }
 }
 

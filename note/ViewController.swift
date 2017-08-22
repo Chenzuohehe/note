@@ -15,6 +15,9 @@ class ViewController: UIViewController,FSCalendarDataSource, FSCalendarDelegate,
     
     @IBOutlet weak var mainCollectionView: UICollectionView!
     
+    var today = DayModel()
+    
+    
     lazy var scopeGesture: UIPanGestureRecognizer = {
         //        [unowned self] in
         let panGesture = UIPanGestureRecognizer(target: self.calendar, action: #selector(self.calendar.handleScopeGesture(_:)))
@@ -30,8 +33,44 @@ class ViewController: UIViewController,FSCalendarDataSource, FSCalendarDelegate,
 //        self.tableView.panGestureRecognizer.require(toFail: self.scopeGesture)
         self.calendar.scope = .month
         
+        for dayModel in days {
+            if dayModel.day == dayString(Date()) {
+                today = dayModel
+                mainCollectionView.reloadData()
+            }
+        }
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        mainCollectionView.reloadData()
+    }
+    
+    func reloadCollection(_ date:Date) {
+        for dayModel in days {
+            if dayModel.day == dayString(date) {
+                today = dayModel
+                mainCollectionView.reloadData()
+            }
+        }
 
+    }
+    
+    func calendar(_ calendar: FSCalendar, didSelect date: Date, at monthPosition: FSCalendarMonthPosition) {
+        var hasNote = false
+        
+        for dayModel in days {
+            if dayModel.day == dayString(date) {
+                today = dayModel
+                mainCollectionView.reloadData()
+                hasNote = true
+            }
+        }
+        if !hasNote {
+            today = DayModel()
+            mainCollectionView.reloadData()
+        }
+    }
+    
     func calendar(_ calendar: FSCalendar, boundingRectWillChange bounds: CGRect, animated: Bool) {
         self.calendarConstraint.constant = bounds.height
         self.view.layoutIfNeeded()
@@ -44,7 +83,10 @@ class ViewController: UIViewController,FSCalendarDataSource, FSCalendarDelegate,
         return 1
     }
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 10
+        if today.notes == nil {
+            return 0
+        }
+        return today.notes!.count
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
@@ -54,9 +96,24 @@ class ViewController: UIViewController,FSCalendarDataSource, FSCalendarDelegate,
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "itemCell", for: indexPath) as! ItemCollectionViewCell
         cell.layer.cornerRadius = 4
-        cell.dayLabel.text = "2017.9.9"
-        
+        let noteModel = today.notes?[indexPath.row]
+        cell.dayLabel.text = noteModel?.creatDay
+        cell.titleLabel.text = noteModel?.title
+        cell.contentLabel.text = noteModel?.content
+        cell.contentLabel.sizeToFit()
         return cell
     }
+    
+    
+    
+    @IBAction func reset(_ sender: Any) {
+        archiverDays([])
+    }
+    
+    @IBAction func refresh(_ sender: Any) {
+        days = unArchiverDays()
+        print(days)
+    }
+    
 }
 
