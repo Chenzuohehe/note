@@ -33,29 +33,20 @@ class ViewController: UIViewController,FSCalendarDataSource, FSCalendarDelegate,
 //        self.tableView.panGestureRecognizer.require(toFail: self.scopeGesture)
         self.calendar.scope = .month
         
-        for dayModel in days {
-            if dayModel.day == dayString(Date()) {
-                today = dayModel
-                mainCollectionView.reloadData()
-            }
-        }
+        reloadCollection(Date())
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        mainCollectionView.reloadData()
+        //reload 一下 确认选中日期
+        
+        if (self.calendar.selectedDate != nil) {
+            reloadCollection(self.calendar.selectedDate!)
+        }else{
+            reloadCollection(Date())
+        }
     }
     
     func reloadCollection(_ date:Date) {
-        for dayModel in days {
-            if dayModel.day == dayString(date) {
-                today = dayModel
-                mainCollectionView.reloadData()
-            }
-        }
-
-    }
-    
-    func calendar(_ calendar: FSCalendar, didSelect date: Date, at monthPosition: FSCalendarMonthPosition) {
         var hasNote = false
         
         for dayModel in days {
@@ -71,22 +62,35 @@ class ViewController: UIViewController,FSCalendarDataSource, FSCalendarDelegate,
         }
     }
     
+    func calendar(_ calendar: FSCalendar, didSelect date: Date, at monthPosition: FSCalendarMonthPosition) {
+        reloadCollection(date)
+    }
+    
     func calendar(_ calendar: FSCalendar, boundingRectWillChange bounds: CGRect, animated: Bool) {
         self.calendarConstraint.constant = bounds.height
         self.view.layoutIfNeeded()
     }
 
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        if today.notes == nil {
+            return
+        }
+        if indexPath.row == today.notes?.count {
+            return
+        }
         
+        let nextViewController = DisPlayTableViewController()
+        self.navigationController?.pushViewController(nextViewController, animated: true)
+        print("123")
     }
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 1
     }
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         if today.notes == nil {
-            return 0
+            return 1
         }
-        return today.notes!.count
+        return today.notes!.count + 1
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
@@ -94,6 +98,12 @@ class ViewController: UIViewController,FSCalendarDataSource, FSCalendarDelegate,
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        
+        if today.notes == nil || indexPath.row == today.notes?.count{
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "addNew", for: indexPath)
+            cell.layer.cornerRadius = 4
+            return cell
+        }
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "itemCell", for: indexPath) as! ItemCollectionViewCell
         cell.layer.cornerRadius = 4
         let noteModel = today.notes?[indexPath.row]
@@ -103,8 +113,6 @@ class ViewController: UIViewController,FSCalendarDataSource, FSCalendarDelegate,
         cell.contentLabel.sizeToFit()
         return cell
     }
-    
-    
     
     @IBAction func reset(_ sender: Any) {
         archiverDays([])

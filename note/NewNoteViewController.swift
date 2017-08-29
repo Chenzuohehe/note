@@ -255,7 +255,8 @@ class NewNoteViewController: UIViewController, UITableViewDelegate, UITableViewD
         let today = DayModel()
         
         for day in days {
-            if day.day == dayString(Date()){
+            print(day.day!, dayString(Date()))
+            if day.day! == dayString(Date()){
                 hasDayModel = true
                 day.notes!.append(self.newNote)
             }

@@ -29,6 +29,9 @@
 		4EA246141F302313008AD5C0 /* TimeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EA246131F302313008AD5C0 /* TimeTableViewCell.swift */; };
 		4EA246161F302322008AD5C0 /* SwitchTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EA246151F302322008AD5C0 /* SwitchTableViewCell.swift */; };
 		4EA246DD1F32CEA0008AD5C0 /* note+Define.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EA246DC1F32CEA0008AD5C0 /* note+Define.swift */; };
+		4EC1C16A1F53B59B0006AF00 /* TextTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EC1C1681F53B59B0006AF00 /* TextTableViewCell.swift */; };
+		4EC1C16E1F53F5980006AF00 /* VoiceTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EC1C16C1F53F5980006AF00 /* VoiceTableViewCell.swift */; };
+		4EE9F1D71F50210900044505 /* DisPlayTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EE9F1D51F50210900044505 /* DisPlayTableViewController.swift */; };
 		5C11B8D167E7B75D5359743C /* Pods_note.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D629FD767CD6C7FF35B48805 /* Pods_note.framework */; };
 /* End PBXBuildFile section */
 
@@ -80,6 +83,9 @@
 		4EA246131F302313008AD5C0 /* TimeTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TimeTableViewCell.swift; path = ../../TimeTableViewCell.swift; sourceTree = "<group>"; };
 		4EA246151F302322008AD5C0 /* SwitchTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SwitchTableViewCell.swift; path = ../../SwitchTableViewCell.swift; sourceTree = "<group>"; };
 		4EA246DC1F32CEA0008AD5C0 /* note+Define.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "note+Define.swift"; sourceTree = "<group>"; };
+		4EC1C1681F53B59B0006AF00 /* TextTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextTableViewCell.swift; sourceTree = "<group>"; };
+		4EC1C16C1F53F5980006AF00 /* VoiceTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VoiceTableViewCell.swift; sourceTree = "<group>"; };
+		4EE9F1D51F50210900044505 /* DisPlayTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DisPlayTableViewController.swift; sourceTree = "<group>"; };
 		59848ADD58AA9378A7205A9D /* Pods-note.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-note.release.xcconfig"; path = "Pods/Target Support Files/Pods-note/Pods-note.release.xcconfig"; sourceTree = "<group>"; };
 		77E71CF667B4F2D401CA40BE /* Pods-note.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-note.debug.xcconfig"; path = "Pods/Target Support Files/Pods-note/Pods-note.debug.xcconfig"; sourceTree = "<group>"; };
 		D629FD767CD6C7FF35B48805 /* Pods_note.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_note.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -205,6 +211,7 @@
 				4E4AE1231F38465700B916F9 /* ContentViewController.swift */,
 				4E4AE1301F3AECC200B916F9 /* VoiceViewController.swift */,
 				4E4AE1311F3AECC200B916F9 /* VoiceViewController.xib */,
+				4EE9F1D51F50210900044505 /* DisPlayTableViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -227,6 +234,8 @@
 				4EA246131F302313008AD5C0 /* TimeTableViewCell.swift */,
 				4EA246151F302322008AD5C0 /* SwitchTableViewCell.swift */,
 				4E9361CC1F43D858001D04B0 /* ItemCollectionViewCell.swift */,
+				4EC1C1681F53B59B0006AF00 /* TextTableViewCell.swift */,
+				4EC1C16C1F53F5980006AF00 /* VoiceTableViewCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -451,9 +460,12 @@
 				4E4AE1281F3954DF00B916F9 /* NoteModel.swift in Sources */,
 				4E3966F61F25DDBE0071EA7B /* AppDelegate.swift in Sources */,
 				4EA246101F2ED825008AD5C0 /* NewNoteViewController.swift in Sources */,
+				4EC1C16A1F53B59B0006AF00 /* TextTableViewCell.swift in Sources */,
 				4EA246141F302313008AD5C0 /* TimeTableViewCell.swift in Sources */,
 				4EA246161F302322008AD5C0 /* SwitchTableViewCell.swift in Sources */,
+				4EC1C16E1F53F5980006AF00 /* VoiceTableViewCell.swift in Sources */,
 				4E9361C91F42E50A001D04B0 /* RecorderTableViewCell.swift in Sources */,
+				4EE9F1D71F50210900044505 /* DisPlayTableViewController.swift in Sources */,
 				4E9361CE1F43D858001D04B0 /* ItemCollectionViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
