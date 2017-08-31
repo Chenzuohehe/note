@@ -22,20 +22,21 @@ class NoteModel: NSObject , NSCoding{
     
     //语音
     var voiceName:String?
-    var voiceURLString:String?
+//    var voiceURLString:String?
+    var voiceURL:URL?
+    
     
     //地理坐标
     
     func encode(with aCoder: NSCoder) {
         aCoder.encode(title, forKey: "title")
         aCoder.encode(content, forKey: "content")
-//        aCoder.encode(time, forKey: "time")
         
         aCoder.encode(addToCalender, forKey: "addToCalender")
         aCoder.encode(addAddress, forKey: "addAddress")
         
         aCoder.encode(voiceName, forKey: "voiceName")
-        aCoder.encode(voiceURLString, forKey: "voiceURLString")
+        aCoder.encode(voiceURL, forKey: "voiceURL")
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -43,12 +44,11 @@ class NoteModel: NSObject , NSCoding{
         
         title = aDecoder.decodeObject(forKey: "title") as? String
         content = aDecoder.decodeObject(forKey: "content") as? String
-//        time = aDecoder.decodeObject(forKey: "time") as! String
         
         
         
         voiceName = aDecoder.decodeObject(forKey: "voiceName") as? String
-        voiceURLString = aDecoder.decodeObject(forKey: "voiceURLString") as? String
+        voiceURL = aDecoder.decodeObject(forKey: "voiceURL") as? URL
     }
     
     override init(){

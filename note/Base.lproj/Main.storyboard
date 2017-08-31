@@ -83,7 +83,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="晚上计划跑五公里，然后五十个俯卧撑晚上计划跑五公里，然后五十个俯卧撑晚上计划跑五公里，然后五十个俯卧撑晚上计划跑五公里，然后五十个俯卧撑晚上计划跑五公里，然后五十个俯卧撑" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Fwp-Od-icJ">
-                                                    <rect key="frame" x="8" y="38" width="137" height="55"/>
+                                                    <rect key="frame" x="8" y="38" width="137" height="51"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -101,15 +101,15 @@
                                         </view>
                                         <color key="backgroundColor" red="0.40000000600000002" green="0.80000001190000003" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
-                                            <constraint firstItem="Fwp-Od-icJ" firstAttribute="top" secondItem="uEZ-iV-bb1" secondAttribute="bottom" id="8Tn-1o-4Qg"/>
-                                            <constraint firstAttribute="trailing" secondItem="Fwp-Od-icJ" secondAttribute="trailing" constant="8" id="9Fo-73-9di"/>
+                                            <constraint firstAttribute="trailing" secondItem="Fwp-Od-icJ" secondAttribute="trailing" constant="8" id="8Ks-eB-xSa"/>
                                             <constraint firstAttribute="trailing" secondItem="nUq-04-znp" secondAttribute="trailing" constant="8" id="9kM-Ml-2aY"/>
+                                            <constraint firstAttribute="bottom" secondItem="Fwp-Od-icJ" secondAttribute="bottom" constant="4" id="J4a-F1-KUj"/>
+                                            <constraint firstItem="Fwp-Od-icJ" firstAttribute="top" secondItem="uEZ-iV-bb1" secondAttribute="bottom" id="Jhx-o9-XTs"/>
                                             <constraint firstAttribute="trailing" secondItem="uEZ-iV-bb1" secondAttribute="trailing" constant="8" id="c5w-Cu-93j"/>
+                                            <constraint firstItem="Fwp-Od-icJ" firstAttribute="leading" secondItem="qVI-5G-otM" secondAttribute="leading" constant="8" id="jPQ-m6-5lo"/>
                                             <constraint firstItem="uEZ-iV-bb1" firstAttribute="leading" secondItem="qVI-5G-otM" secondAttribute="leading" constant="8" id="lqd-eb-K5n"/>
-                                            <constraint firstAttribute="bottom" secondItem="Fwp-Od-icJ" secondAttribute="bottom" id="nXl-wy-y7F"/>
                                             <constraint firstItem="nUq-04-znp" firstAttribute="top" secondItem="qVI-5G-otM" secondAttribute="top" id="p9k-qp-92S"/>
                                             <constraint firstItem="uEZ-iV-bb1" firstAttribute="top" secondItem="nUq-04-znp" secondAttribute="bottom" id="qc5-vY-w4r"/>
-                                            <constraint firstItem="Fwp-Od-icJ" firstAttribute="leading" secondItem="qVI-5G-otM" secondAttribute="leading" constant="8" id="sHE-O4-JUh"/>
                                             <constraint firstItem="nUq-04-znp" firstAttribute="leading" secondItem="qVI-5G-otM" secondAttribute="leading" constant="8" id="vEc-BZ-UsE"/>
                                         </constraints>
                                         <connections>
@@ -209,7 +209,7 @@
         <!--Data Source-->
         <scene sceneID="VIT-pU-tK5">
             <objects>
-                <viewController id="0RN-Jo-cli" customClass="NewNoteViewController" customModule="note" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController restorationIdentifier="newNote" storyboardIdentifier="newNote" id="0RN-Jo-cli" customClass="NewNoteViewController" customModule="note" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="p6E-nu-GpU"/>
                         <viewControllerLayoutGuide type="bottom" id="N4l-MK-R9g"/>

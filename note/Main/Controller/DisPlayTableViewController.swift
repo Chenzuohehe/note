@@ -9,14 +9,19 @@
 import UIKit
 
 class DisPlayTableViewController: UITableViewController {
-        
+    
+    var note:NoteModel!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.tableView.separatorStyle = .none
         self.tableView.estimatedRowHeight = 44
         self.tableView.rowHeight = UITableViewAutomaticDimension
-//        self.tableView.register(UINib.init(nibName: "TextTableViewCell", bundle: nil), forCellReuseIdentifier: "cell")
+        self.tableView.separatorStyle = .none
         self.tableView.register(TextTableViewCell.self, forCellReuseIdentifier: "cell")
+        
+        let rightBtn = UIBarButtonItem(title: "编辑", style: .plain, target: self, action: #selector(editClick))
+        self.navigationItem.rightBarButtonItem = rightBtn
     }
 
     override func didReceiveMemoryWarning() {
@@ -41,15 +46,17 @@ class DisPlayTableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-//        let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
-        
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell") as! TextTableViewCell
-        
-        cell.titleLable.text = "123"
-        cell.timeLabel.text = "20187777"
-        cell.contentLabel.text = "cell.detailTextLabel?.textcell.detailTextLabel?.textcell.detailTextLabel?.textcell.detailTextLabel?.textcell.detailTextLabel?.textcell.detailTextLabel?.textcell.detailTextLabel?.textcell.detailTextLabel?.textcell.detailTextLabel?.text"
+        cell.bind(self.note)
         
         return cell
     }
     
+    
+    func editClick() {
+        let mainStoryBoard = UIStoryboard(name: "Main", bundle: nil)
+        let nextViewController = mainStoryBoard.instantiateViewController(withIdentifier: "newNote") as! NewNoteViewController
+        nextViewController.newNote = self.note
+        self.navigationController?.pushViewController(nextViewController, animated: true)
+    }
 }

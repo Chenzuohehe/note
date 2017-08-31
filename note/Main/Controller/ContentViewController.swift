@@ -43,8 +43,8 @@ class ContentViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    typealias changUserName = (String) ->()
-    var changText: changUserName?
+    typealias changContent = (String) ->()
+    var changText: changContent?
     
     
     func confrimClick() {

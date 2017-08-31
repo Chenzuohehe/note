@@ -104,7 +104,7 @@ class NewNoteViewController: UIViewController, UITableViewDelegate, UITableViewD
             let cell = tableView.dequeueReusableCell(withIdentifier: identifys[0])! as! TitleTableViewCell
             cell.titleTextField.delegate = self
             cell.titleTextField.addTarget(self, action: #selector(saveTitle(_:)), for: .editingChanged)
-            
+            cell.titleTextField?.text = self.newNote.content
             return cell
         case indexName(.contentIndex):
             let cell = tableView.dequeueReusableCell(withIdentifier: identifys[1])!
@@ -153,6 +153,12 @@ class NewNoteViewController: UIViewController, UITableViewDelegate, UITableViewD
             print("语音")
             
             let nextViewController = VoiceViewController(nibName: "VoiceViewController", bundle: nil)
+            nextViewController.voiceBack = { [weak self] (name:String, url:URL) ->() in
+                if let weakself = self {
+                    weakself.newNote.voiceName = name
+                    weakself.newNote.voiceURL = url
+                }
+            }
             self.navigationController?.pushViewController(nextViewController, animated: true)
         default:
             break

@@ -17,12 +17,16 @@ class VoiceViewController: UIViewController, AVAudioPlayerDelegate {
     
     var audioRecorder:AVAudioRecorder!
     var audioPlayer:AVAudioPlayer!
-    var authorized:Bool!
+    var authorized:Bool!//合法，是否允许
     
     var meterTimer:Timer?
     var progressTimer:Timer?
     
+    var recordingName = String()
     var url:URL!
+    
+    typealias addVoice = (String, URL) -> ()
+    var voiceBack:addVoice?
     
     
     @IBOutlet weak var timeLabel: UILabel!
@@ -33,6 +37,8 @@ class VoiceViewController: UIViewController, AVAudioPlayerDelegate {
                           AVNumberOfChannelsKey: 1,//采集音轨
                           AVEncoderAudioQualityKey: NSNumber(value: AVAudioQuality.medium.rawValue)]//音频质量
     
+    
+    
     //根据时间来设置存储文件名
     func directoryURL() -> URL? {
         //定义并构建一个url来保存音频，音频文件名为yyyyMMddHHmmss.caf
@@ -40,7 +46,7 @@ class VoiceViewController: UIViewController, AVAudioPlayerDelegate {
         let currentDateTime = Date()
         let formatter = DateFormatter()
         formatter.dateFormat = "yyyyMMddHHmmss"
-        let recordingName = formatter.string(from: currentDateTime)+".caf"
+        recordingName = formatter.string(from: currentDateTime)+".caf"
         print(recordingName)
         
         let fileManager = FileManager.default
@@ -53,9 +59,13 @@ class VoiceViewController: UIViewController, AVAudioPlayerDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         authorized = false
+        //detection()//验证是否允许使用麦克风
+        //初始化recorder
         readyForRecorder()
-        detection()
+        //检查过去是否有音频
+        
         let rightBtn = UIBarButtonItem(title: "确认添加", style: .plain, target: self, action: #selector(confrimClick))
         self.navigationItem.rightBarButtonItem = rightBtn
     }
@@ -74,6 +84,7 @@ class VoiceViewController: UIViewController, AVAudioPlayerDelegate {
         }
     }
     
+    //验证是否允许使用麦克风
     func detection() {
         let authStatus = AVCaptureDevice.authorizationStatus(forMediaType: AVMediaTypeAudio)
         switch authStatus {
@@ -89,14 +100,12 @@ class VoiceViewController: UIViewController, AVAudioPlayerDelegate {
             })
             alertController.addAction(okAction)
             self.present(alertController, animated: true, completion: nil)
-            
         }
     }
     
     
     func readyForRecorder() {
         //初始化recorder
-        
         let audioSession = AVAudioSession.sharedInstance()
         do {
             try audioSession.setCategory(AVAudioSessionCategoryPlayAndRecord)
@@ -136,6 +145,12 @@ class VoiceViewController: UIViewController, AVAudioPlayerDelegate {
             let progress = audioPlayer.currentTime / audioPlayer.duration
             playProgressView.setProgress(Float(progress), animated: true)
         }
+    }
+    
+    //进度条
+    func audioPlayerDidFinishPlaying(_ player: AVAudioPlayer, successfully flag: Bool) {
+        playButton.isSelected = !playButton.isSelected
+        playProgressView.setProgress(0, animated: false)
     }
     
     func stop() {
@@ -193,15 +208,17 @@ class VoiceViewController: UIViewController, AVAudioPlayerDelegate {
         }
     }
     
-    func audioPlayerDidFinishPlaying(_ player: AVAudioPlayer, successfully flag: Bool) {
-        playButton.isSelected = !playButton.isSelected
-        playProgressView.setProgress(0, animated: false)
-    }
-    
     func confrimClick() {
-        
+        if audioRecorder.currentTime > 0 ,let handle = self.voiceBack{
+            print(self.url, self.recordingName)
+            handle(self.recordingName, self.url)
+            self.navigationController?.popViewController(animated: true)
+        }else{
+            makePost("请先录音", self.view)
+        }
     }
     
+    //MARK:- action 点击
     
     @IBAction func recordingClick(_ sender: UIButton) {
         

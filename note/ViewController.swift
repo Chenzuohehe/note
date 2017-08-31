@@ -80,6 +80,8 @@ class ViewController: UIViewController,FSCalendarDataSource, FSCalendarDelegate,
         }
         
         let nextViewController = DisPlayTableViewController()
+        let noteModel = today.notes?[indexPath.row]
+        nextViewController.note = noteModel
         self.navigationController?.pushViewController(nextViewController, animated: true)
         print("123")
     }
