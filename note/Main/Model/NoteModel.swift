@@ -22,7 +22,6 @@ class NoteModel: NSObject , NSCoding{
     
     //语音
     var voiceName:String?
-//    var voiceURLString:String?
     var voiceURL:URL?
     
     
@@ -32,6 +31,10 @@ class NoteModel: NSObject , NSCoding{
         aCoder.encode(title, forKey: "title")
         aCoder.encode(content, forKey: "content")
         
+        aCoder.encode(creatDay, forKey: "creatDay")
+        aCoder.encode(startDate, forKey: "startDate")
+        aCoder.encode(endDate, forKey: "endDate")
+        
         aCoder.encode(addToCalender, forKey: "addToCalender")
         aCoder.encode(addAddress, forKey: "addAddress")
         
@@ -40,12 +43,17 @@ class NoteModel: NSObject , NSCoding{
     }
     
     required init?(coder aDecoder: NSCoder) {
-//        super.init()
+        super.init()
         
         title = aDecoder.decodeObject(forKey: "title") as? String
         content = aDecoder.decodeObject(forKey: "content") as? String
         
+        creatDay = aDecoder.decodeObject(forKey: "creatDay") as? String
+        startDate = aDecoder.decodeObject(forKey: "startDate") as? Date
+        endDate = aDecoder.decodeObject(forKey: "endDate") as? Date
         
+        addToCalender = aDecoder.decodeObject(forKey: "addToCalender") as? Bool
+        addAddress = aDecoder.decodeObject(forKey: "addAddress") as? Bool
         
         voiceName = aDecoder.decodeObject(forKey: "voiceName") as? String
         voiceURL = aDecoder.decodeObject(forKey: "voiceURL") as? URL
@@ -66,7 +74,7 @@ class DayModel: NSObject, NSCoding {
     }
     
     required init?(coder aDecoder: NSCoder) {
-//        super.init()
+        super.init()
         
         self.day = aDecoder.decodeObject(forKey: "day") as? String
         self.notes = aDecoder.decodeObject(forKey: "notes") as? [NoteModel]

@@ -24,6 +24,8 @@ class VoiceViewController: UIViewController, AVAudioPlayerDelegate {
     
     var recordingName = String()
     var url:URL!
+    var oldUrl:URL?
+    
     
     typealias addVoice = (String, URL) -> ()
     var voiceBack:addVoice?
@@ -64,8 +66,6 @@ class VoiceViewController: UIViewController, AVAudioPlayerDelegate {
         //detection()//验证是否允许使用麦克风
         //初始化recorder
         readyForRecorder()
-        //检查过去是否有音频
-        
         let rightBtn = UIBarButtonItem(title: "确认添加", style: .plain, target: self, action: #selector(confrimClick))
         self.navigationItem.rightBarButtonItem = rightBtn
     }
@@ -235,7 +235,7 @@ class VoiceViewController: UIViewController, AVAudioPlayerDelegate {
             pause()
             sender.isSelected = !sender.isSelected
         }else{
-            if audioRecorder.currentTime > 0 {
+            if audioRecorder.currentTime > 0 || self.oldUrl != nil{
                 play()
                 sender.isSelected = !sender.isSelected
             }
