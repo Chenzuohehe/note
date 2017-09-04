@@ -16,14 +16,12 @@ class NoteModel: NSObject , NSCoding{
     var startDate:Date?
     var endDate:Date?
     
-    
     var addToCalender:Bool?
     var addAddress:Bool?
     
     //语音
     var voiceName:String?
     var voiceURL:URL?
-    
     
     //地理坐标
     

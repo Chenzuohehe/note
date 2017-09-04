@@ -104,7 +104,7 @@ class NewNoteViewController: UIViewController, UITableViewDelegate, UITableViewD
             let cell = tableView.dequeueReusableCell(withIdentifier: identifys[0])! as! TitleTableViewCell
             cell.titleTextField.delegate = self
             cell.titleTextField.addTarget(self, action: #selector(saveTitle(_:)), for: .editingChanged)
-            cell.titleTextField?.text = self.newNote.content
+            cell.titleTextField?.text = self.newNote.title
             return cell
         case indexName(.contentIndex):
             let cell = tableView.dequeueReusableCell(withIdentifier: identifys[1])!
@@ -119,6 +119,11 @@ class NewNoteViewController: UIViewController, UITableViewDelegate, UITableViewD
             return cell
         case indexName(.voiceIndex):
             let cell = tableView.dequeueReusableCell(withIdentifier: identifys[3])! as! RecorderTableViewCell
+            if self.newNote.voiceName == nil {
+                cell.recorderNameLabel?.text = ""
+            }else{
+                cell.recorderNameLabel?.text = self.newNote.voiceName
+            }
             return cell
         default:
             

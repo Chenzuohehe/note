@@ -66,6 +66,16 @@ class VoiceViewController: UIViewController, AVAudioPlayerDelegate {
         //detection()//验证是否允许使用麦克风
         //初始化recorder
         readyForRecorder()
+        
+        if self.oldUrl != nil {
+            //之前有录音
+            //播放器播放之前的录音 显示之前录音的时长？
+            //录音点击删除之前的录音，重新录音
+            
+        }else{
+            //之前没有 正常运行
+        }
+        
         let rightBtn = UIBarButtonItem(title: "确认添加", style: .plain, target: self, action: #selector(confrimClick))
         self.navigationItem.rightBarButtonItem = rightBtn
     }
@@ -171,6 +181,7 @@ class VoiceViewController: UIViewController, AVAudioPlayerDelegate {
             do {
                 try audioSession.setActive(true)
                 audioRecorder.record()
+                self.oldUrl = nil
                 print("record!")
             } catch {
             }
@@ -185,7 +196,12 @@ class VoiceViewController: UIViewController, AVAudioPlayerDelegate {
         }
         audioRecorder.stop()
         do {
-            try audioPlayer = AVAudioPlayer(contentsOf: audioRecorder.url)
+            if self.oldUrl != nil {
+                try audioPlayer = AVAudioPlayer(contentsOf: self.oldUrl!)
+            }else{
+                try audioPlayer = AVAudioPlayer(contentsOf: audioRecorder.url)
+            }
+            
             audioPlayer.play()
             audioPlayer.delegate = self
             progressTimer = Timer.scheduledTimer(timeInterval: 0.01, target: self, selector: #selector(progressShow), userInfo: nil, repeats: true)
