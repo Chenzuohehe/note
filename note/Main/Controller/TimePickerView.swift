@@ -17,14 +17,15 @@ class TimePickerView: UIView, UIPickerViewDataSource, UIPickerViewDelegate {
     @IBOutlet weak var endDatePicker: UIPickerView!
     
     var timeString = String()
+    var startTimeString:String?
+    var endTimeString:String?
     
     var startHour:String?
     var startMinute:String?
     var endHour:String?
     var endMinute:String?
     
-//    var startTime:Date?
-//    var endTime:Date?
+    let minuteFormatter = DateFormatter()
     
     weak var delegate:timePickerDelegate?
     
@@ -35,19 +36,27 @@ class TimePickerView: UIView, UIPickerViewDataSource, UIPickerViewDelegate {
         self.endDatePicker.delegate = self
         self.endDatePicker.dataSource = self
         
-//        self.timeString = "00:00 - 00:00"
-        if self.startHour == nil {
-            self.startHour = "00"
+        minuteFormatter.setLocalizedDateFormatFromTemplate("HH:mm")
+        if self.startTimeString == nil {
+            self.startTimeString = minuteFormatter.string(from: Date())
+            print(self.startTimeString!)
         }
-        if self.startMinute == nil {
-            self.startMinute = "00"
+        if self.endTimeString == nil {
+            self.endTimeString = minuteFormatter.string(from: Date())
+            
+            print(self.endTimeString!)
         }
-        if self.endHour == nil {
-            self.endHour = "00"
-        }
-        if self.endMinute == nil {
-            self.endMinute = "00"
-        }
+        
+        
+        startHour = self.startTimeString?.substring(to: self.startTimeString!.range(of: ":")!.lowerBound)
+        startMinute = self.startTimeString?.substring(from: self.startTimeString!.range(of: ":")!.upperBound)
+        endHour = self.endTimeString?.substring(to: self.endTimeString!.range(of: ":")!.lowerBound)
+        endMinute = self.endTimeString?.substring(from: self.endTimeString!.range(of: ":")!.upperBound)
+        
+        self.startDatePicker.selectRow(Int(startHour!)!, inComponent: 0, animated: true)
+        self.startDatePicker.selectRow(Int(startMinute!)!, inComponent: 2, animated: true)
+        self.endDatePicker.selectRow(Int(endHour!)!, inComponent: 0, animated: true)
+        self.endDatePicker.selectRow(Int(endMinute!)!, inComponent: 2, animated: true)
         
     }
     
@@ -72,33 +81,32 @@ class TimePickerView: UIView, UIPickerViewDataSource, UIPickerViewDelegate {
     }
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        if component == 1 {
+            return
+        }
         
         if pickerView == self.startDatePicker {
             if component == 0 {
-                self.startHour = String(row)
+                startHour = String(row)
             }else if component == 2{
-                self.startMinute = String(row)
+                startMinute = String(row)
             }
         }else{
             if component == 0 {
-                self.endHour = String(row)
+                endHour = String(row)
             }else if component == 2{
-                self.endMinute = String(row)
+                endMinute = String(row)
             }
         }
         
-        let startTimeString = String(format: "%@:%@", self.startHour!,self.startMinute!)
-        let endTimeString = String(format: "%@:%@", self.endHour!,self.endMinute!)
-        
-        let minuteFormatter = DateFormatter()
-        minuteFormatter.setLocalizedDateFormatFromTemplate("HH:mm")
+        let startTimeString = String(format: "%@:%@", startHour!,startMinute!)
+        let endTimeString = String(format: "%@:%@", endHour!,endMinute!)
         
         let startDate = minuteFormatter.date(from: startTimeString)
         let endDate = minuteFormatter.date(from: endTimeString)
         
         print(startTimeString, startDate!, endTimeString, endDate!)
-//        minuteFormatter.date(from: )
-//        self.delegate?.getPickTime(startDate!, endDate!)
+        self.delegate?.getPickTime(startDate!, endDate!)
     }
     
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
