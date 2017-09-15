@@ -41,10 +41,10 @@
                             </constraints>
                         </view>
                         <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eH9-3z-0dr">
-                            <rect key="frame" x="10" y="31" width="153" height="199"/>
+                            <rect key="frame" x="10" y="31" width="163" height="199"/>
                         </pickerView>
                         <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GgP-Uq-469">
-                            <rect key="frame" x="212" y="31" width="153" height="199"/>
+                            <rect key="frame" x="202" y="31" width="163" height="199"/>
                         </pickerView>
                     </subviews>
                     <color key="backgroundColor" red="0.98039215690000003" green="0.98039215690000003" blue="0.98039215690000003" alpha="1" colorSpace="calibratedRGB"/>
@@ -52,7 +52,7 @@
                         <constraint firstAttribute="trailing" secondItem="DQV-bf-j1k" secondAttribute="trailing" id="2Ue-Q7-UcJ"/>
                         <constraint firstItem="GgP-Uq-469" firstAttribute="top" secondItem="DQV-bf-j1k" secondAttribute="bottom" constant="30.5" id="3PH-pd-BDl"/>
                         <constraint firstItem="GgP-Uq-469" firstAttribute="width" secondItem="eH9-3z-0dr" secondAttribute="width" id="7IA-p0-C41"/>
-                        <constraint firstItem="eLS-5R-UeL" firstAttribute="leading" secondItem="eH9-3z-0dr" secondAttribute="trailing" constant="10" id="8Az-fZ-jAG"/>
+                        <constraint firstItem="eLS-5R-UeL" firstAttribute="leading" secondItem="eH9-3z-0dr" secondAttribute="trailing" id="8Az-fZ-jAG"/>
                         <constraint firstItem="DQV-bf-j1k" firstAttribute="top" secondItem="EF6-ho-H9f" secondAttribute="top" id="9Te-T4-8Ay"/>
                         <constraint firstAttribute="bottom" secondItem="eH9-3z-0dr" secondAttribute="bottom" id="Fpz-m3-9rr"/>
                         <constraint firstAttribute="trailing" secondItem="GgP-Uq-469" secondAttribute="trailing" constant="10" id="H5S-9o-Fe3"/>
@@ -63,7 +63,7 @@
                         <constraint firstAttribute="bottom" secondItem="GgP-Uq-469" secondAttribute="bottom" id="nYI-KJ-E0c"/>
                         <constraint firstItem="eLS-5R-UeL" firstAttribute="top" secondItem="EF6-ho-H9f" secondAttribute="top" constant="31" id="u9z-9W-39m"/>
                         <constraint firstItem="eH9-3z-0dr" firstAttribute="top" secondItem="DQV-bf-j1k" secondAttribute="bottom" constant="30.5" id="vMl-wa-pCk"/>
-                        <constraint firstItem="GgP-Uq-469" firstAttribute="leading" secondItem="eLS-5R-UeL" secondAttribute="trailing" constant="10" id="wxh-b9-b37"/>
+                        <constraint firstItem="GgP-Uq-469" firstAttribute="leading" secondItem="eLS-5R-UeL" secondAttribute="trailing" id="wxh-b9-b37"/>
                     </constraints>
                 </view>
             </subviews>

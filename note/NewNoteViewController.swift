@@ -11,6 +11,7 @@ import SnapKit
 
 class NewNoteViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, FSCalendarDataSource, FSCalendarDelegate, UIGestureRecognizerDelegate, UITextFieldDelegate, timePickerDelegate {
 
+    var time:Date?
     @IBOutlet weak var calendar: FSCalendar!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var calendarHight: NSLayoutConstraint!
@@ -43,6 +44,14 @@ class NewNoteViewController: UIViewController, UITableViewDelegate, UITableViewD
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        print(time!)
+        
+//        let dayFormatter = DateFormatter()
+//        dayFormatter.setLocalizedDateFormatFromTemplate("MM/dd")
+//        let dayDate = dayFormatter.date(from: time)
+//        print(dayDate)
+        self.calendar.select(time)
         
         self.view.addGestureRecognizer(self.scopeGesture)
         self.tableView.panGestureRecognizer.require(toFail: self.scopeGesture)

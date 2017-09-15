@@ -64,10 +64,13 @@ class NoteModel: NSObject , NSCoding{
 
 class DayModel: NSObject, NSCoding {
     var day:String?
+    var dayDate:Date?
+    
     var notes:[NoteModel]?
     
     func encode(with aCoder: NSCoder) {
         aCoder.encode(self.day, forKey: "day")
+        aCoder.encode(self.dayDate, forKey: "dayDate")
         aCoder.encode(self.notes, forKey: "notes")
     }
     
@@ -75,12 +78,23 @@ class DayModel: NSObject, NSCoding {
         super.init()
         
         self.day = aDecoder.decodeObject(forKey: "day") as? String
+        self.dayDate = aDecoder.decodeObject(forKey: "dayDate") as? Date
         self.notes = aDecoder.decodeObject(forKey: "notes") as? [NoteModel]
     }
     
     override init() {
         
     }
+    
+    func setDate(_ date:Date) {
+        let dayFormatter = DateFormatter()
+        dayFormatter.setLocalizedDateFormatFromTemplate("MM/dd")
+        self.day = dayFormatter.string(from: date)
+        dayFormatter.setLocalizedDateFormatFromTemplate("yyyy/MM/dd")
+        let dayString = dayFormatter.string(from: date)
+        self.dayDate = dayFormatter.date(from: dayString)
+    }
+    
     //添加对note的排序
     func noteSort() {
         

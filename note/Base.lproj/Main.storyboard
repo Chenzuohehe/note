@@ -153,7 +153,7 @@
                                             <constraint firstAttribute="trailing" secondItem="5XA-SY-cO8" secondAttribute="trailing" id="zj0-Lc-rnd"/>
                                         </constraints>
                                         <connections>
-                                            <segue destination="0RN-Jo-cli" kind="push" id="uNa-UY-kRb"/>
+                                            <segue destination="0RN-Jo-cli" kind="push" identifier="new" id="uNa-UY-kRb"/>
                                         </connections>
                                     </collectionViewCell>
                                 </cells>
@@ -178,10 +178,10 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="pyO-Zk-QhA">
-                        <rightBarButtonItems>
-                            <barButtonItem title="+" id="oyc-1L-avD">
+                        <leftBarButtonItems>
+                            <barButtonItem title="重读" id="zEM-1W-6Uh">
                                 <connections>
-                                    <segue destination="0RN-Jo-cli" kind="push" id="edl-RO-GUE"/>
+                                    <action selector="refresh:" destination="YdJ-dr-1wG" id="vJQ-r9-mcz"/>
                                 </connections>
                             </barButtonItem>
                             <barButtonItem title="重置" id="xsd-55-dGr">
@@ -189,12 +189,12 @@
                                     <action selector="reset:" destination="YdJ-dr-1wG" id="yFm-Jx-RXI"/>
                                 </connections>
                             </barButtonItem>
-                            <barButtonItem title="重读" id="zEM-1W-6Uh">
-                                <connections>
-                                    <action selector="refresh:" destination="YdJ-dr-1wG" id="vJQ-r9-mcz"/>
-                                </connections>
-                            </barButtonItem>
-                        </rightBarButtonItems>
+                        </leftBarButtonItems>
+                        <barButtonItem key="rightBarButtonItem" title="+" id="oyc-1L-avD">
+                            <connections>
+                                <segue destination="0RN-Jo-cli" kind="push" identifier="new" id="edl-RO-GUE"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="calendar" destination="61w-iv-gXP" id="5KK-1M-Ssy"/>

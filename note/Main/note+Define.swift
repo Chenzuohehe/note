@@ -39,7 +39,7 @@ func makePost(_ string:String, _ superView:UIView) {
 
 func dayString(_ date:Date) -> String {
     let dayFormatter = DateFormatter()
-    dayFormatter.setLocalizedDateFormatFromTemplate("MM-dd")
+    dayFormatter.setLocalizedDateFormatFromTemplate("MM/dd")
     let dayString = dayFormatter.string(from: date)
     return dayString
 }

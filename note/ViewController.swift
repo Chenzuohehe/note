@@ -17,7 +17,6 @@ class ViewController: UIViewController,FSCalendarDataSource, FSCalendarDelegate,
     
     var today = DayModel()
     
-    
     lazy var scopeGesture: UIPanGestureRecognizer = {
         //        [unowned self] in
         let panGesture = UIPanGestureRecognizer(target: self.calendar, action: #selector(self.calendar.handleScopeGesture(_:)))
@@ -34,6 +33,7 @@ class ViewController: UIViewController,FSCalendarDataSource, FSCalendarDelegate,
         self.calendar.scope = .month
         
         reloadCollection(Date())
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -58,6 +58,7 @@ class ViewController: UIViewController,FSCalendarDataSource, FSCalendarDelegate,
         }
         if !hasNote {
             today = DayModel()
+            today.setDate(Date())
             mainCollectionView.reloadData()
         }
     }
@@ -125,5 +126,10 @@ class ViewController: UIViewController,FSCalendarDataSource, FSCalendarDelegate,
         print(days)
     }
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "new" {
+            segue.destination.setValue(today.dayDate, forKey: "time")
+        }
+    }
 }
 
