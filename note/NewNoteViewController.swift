@@ -12,6 +12,13 @@ import SnapKit
 class NewNoteViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, FSCalendarDataSource, FSCalendarDelegate, UIGestureRecognizerDelegate, UITextFieldDelegate, timePickerDelegate {
 
     var time:Date?
+//    {
+//        get{
+//            if time != nil {
+//                return time
+//            }else if newNote.
+//        }
+//    }
     @IBOutlet weak var calendar: FSCalendar!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var calendarHight: NSLayoutConstraint!
@@ -40,12 +47,15 @@ class NewNoteViewController: UIViewController, UITableViewDelegate, UITableViewD
         return panGesture
     }()
     
+    
+    
+    
     let touch = UITapGestureRecognizer()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        print(time!)
+//        print(time!)
         
 //        let dayFormatter = DateFormatter()
 //        dayFormatter.setLocalizedDateFormatFromTemplate("MM/dd")
@@ -270,20 +280,19 @@ class NewNoteViewController: UIViewController, UITableViewDelegate, UITableViewD
         }
         self.newNote.creatDay = dayString(selectDay)
         
-        
         var hasDayModel = false
         let today = DayModel()
         
         for day in days {
-            print(day.day!, dayString(Date()))
-            if day.day! == dayString(Date()){
+            print(day.day!, dayString(time!))
+            if day.day! == dayString(time!){
                 hasDayModel = true
                 day.notes!.append(self.newNote)
             }
         }
         
         if !hasDayModel {
-            today.day = dayString(selectDay)
+            today.setDate(selectDay)
             today.notes = [self.newNote]
             days.append(today)
         }

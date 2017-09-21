@@ -56,6 +56,7 @@ class DisPlayTableViewController: UITableViewController {
     func editClick() {
         let mainStoryBoard = UIStoryboard(name: "Main", bundle: nil)
         let nextViewController = mainStoryBoard.instantiateViewController(withIdentifier: "newNote") as! NewNoteViewController
+        
         nextViewController.newNote = self.note
         self.navigationController?.pushViewController(nextViewController, animated: true)
     }

@@ -20,6 +20,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         days = unArchiverDays()
         print(days)
+        
+        print(SCREEN_HEIGHT)
         return true
     }
     

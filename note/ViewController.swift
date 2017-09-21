@@ -29,8 +29,9 @@ class ViewController: UIViewController,FSCalendarDataSource, FSCalendarDelegate,
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.addGestureRecognizer(self.scopeGesture)
-//        self.tableView.panGestureRecognizer.require(toFail: self.scopeGesture)
+        
         self.calendar.scope = .month
+        self.calendar.appearance.eventDefaultColor = noteColor1
         
         reloadCollection(Date())
         
@@ -44,6 +45,7 @@ class ViewController: UIViewController,FSCalendarDataSource, FSCalendarDelegate,
         }else{
             reloadCollection(Date())
         }
+        self.calendar.reloadData()
     }
     
     func reloadCollection(_ date:Date) {
@@ -58,11 +60,12 @@ class ViewController: UIViewController,FSCalendarDataSource, FSCalendarDelegate,
         }
         if !hasNote {
             today = DayModel()
-            today.setDate(Date())
+            today.setDate(date)
             mainCollectionView.reloadData()
         }
     }
     
+    //MARK:- FSCalendarDelegate
     func calendar(_ calendar: FSCalendar, didSelect date: Date, at monthPosition: FSCalendarMonthPosition) {
         reloadCollection(date)
     }
@@ -71,6 +74,17 @@ class ViewController: UIViewController,FSCalendarDataSource, FSCalendarDelegate,
         self.calendarConstraint.constant = bounds.height
         self.view.layoutIfNeeded()
     }
+    func calendar(_ calendar: FSCalendar, numberOfEventsFor date: Date) -> Int {
+        print(date)
+        print(dayString(date))
+        for dayModel in days {
+            if dayModel.dayDate == date {
+                return (dayModel.notes?.count)!
+            }
+        }
+        return 0
+    }
+    
 
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if today.notes == nil {

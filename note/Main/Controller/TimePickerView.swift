@@ -47,7 +47,6 @@ class TimePickerView: UIView, UIPickerViewDataSource, UIPickerViewDelegate {
             print(self.endTimeString!)
         }
         
-        
         startHour = self.startTimeString?.substring(to: self.startTimeString!.range(of: ":")!.lowerBound)
         startMinute = self.startTimeString?.substring(from: self.startTimeString!.range(of: ":")!.upperBound)
         endHour = self.endTimeString?.substring(to: self.endTimeString!.range(of: ":")!.lowerBound)
@@ -57,12 +56,6 @@ class TimePickerView: UIView, UIPickerViewDataSource, UIPickerViewDelegate {
         self.startDatePicker.selectRow(Int(startMinute!)!, inComponent: 2, animated: true)
         self.endDatePicker.selectRow(Int(endHour!)!, inComponent: 0, animated: true)
         self.endDatePicker.selectRow(Int(endMinute!)!, inComponent: 2, animated: true)
-        
-    }
-    
-    @IBAction func timeChanged(_ sender: UIDatePicker) {
-//        self.delegate?.getPickTime(self.startDatePicker.date, self.endDatePicker.date)
-        
     }
     
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {

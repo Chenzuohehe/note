@@ -15,6 +15,10 @@ func noteColor(red:CGFloat, green:CGFloat, blue:CGFloat) -> UIColor {
     return UIColor(red: red/255.0, green: green/255.0, blue: blue/255.0, alpha: 0.1)
 }
 
+let noteColor1 = UIColor(red: 196/255.0, green: 225/255.0, blue: 137/255.0, alpha: 1)
+let noteColor2 = UIColor(red: 123/255.0, green: 201/255.0, blue: 111/255.0, alpha: 1)
+let noteColor3 = UIColor(red: 35/255.0, green: 154/255.0, blue: 59/255.0, alpha: 1)
+let noteColor4 = UIColor(red: 25/255.0, green: 97/255.0, blue: 39/255.0, alpha: 1)
 
 func getLocalDate(_ date:Date) -> Date {
     

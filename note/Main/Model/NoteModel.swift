@@ -13,6 +13,8 @@ class NoteModel: NSObject , NSCoding{
     var content:String?
     
     var creatDay:String?
+    
+    var creatDate:Date?
     var startDate:Date?
     var endDate:Date?
     
@@ -28,8 +30,9 @@ class NoteModel: NSObject , NSCoding{
     func encode(with aCoder: NSCoder) {
         aCoder.encode(title, forKey: "title")
         aCoder.encode(content, forKey: "content")
-        
         aCoder.encode(creatDay, forKey: "creatDay")
+        
+        aCoder.encode(creatDate, forKey: "creatDate")
         aCoder.encode(startDate, forKey: "startDate")
         aCoder.encode(endDate, forKey: "endDate")
         
@@ -45,8 +48,9 @@ class NoteModel: NSObject , NSCoding{
         
         title = aDecoder.decodeObject(forKey: "title") as? String
         content = aDecoder.decodeObject(forKey: "content") as? String
-        
         creatDay = aDecoder.decodeObject(forKey: "creatDay") as? String
+        
+        creatDate = aDecoder.decodeObject(forKey: "creatDay") as? Date
         startDate = aDecoder.decodeObject(forKey: "startDate") as? Date
         endDate = aDecoder.decodeObject(forKey: "endDate") as? Date
         

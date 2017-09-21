@@ -10,6 +10,7 @@
 		4E0728C51F344B4E003FBB12 /* TimePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E0728C41F344B4E003FBB12 /* TimePickerView.swift */; };
 		4E0728C71F344B5C003FBB12 /* TimePickerView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4E0728C61F344B5C003FBB12 /* TimePickerView.xib */; };
 		4E2E511C1F3DB38A00A680D5 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4E2E511B1F3DB38A00A680D5 /* MapKit.framework */; };
+		4E3365F11F72B046001634BC /* xxxViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E3365F01F72B046001634BC /* xxxViewController.swift */; };
 		4E3966F61F25DDBE0071EA7B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E3966F51F25DDBE0071EA7B /* AppDelegate.swift */; };
 		4E3966F81F25DDBE0071EA7B /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E3966F71F25DDBE0071EA7B /* ViewController.swift */; };
 		4E3966FB1F25DDBE0071EA7B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4E3966F91F25DDBE0071EA7B /* Main.storyboard */; };
@@ -56,6 +57,7 @@
 		4E0728C41F344B4E003FBB12 /* TimePickerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TimePickerView.swift; path = ../Controller/TimePickerView.swift; sourceTree = "<group>"; };
 		4E0728C61F344B5C003FBB12 /* TimePickerView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = TimePickerView.xib; path = ../Controller/TimePickerView.xib; sourceTree = "<group>"; };
 		4E2E511B1F3DB38A00A680D5 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		4E3365F01F72B046001634BC /* xxxViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = xxxViewController.swift; sourceTree = "<group>"; };
 		4E3966F21F25DDBE0071EA7B /* note.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = note.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4E3966F51F25DDBE0071EA7B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		4E3966F71F25DDBE0071EA7B /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ViewController.swift; path = ../../ViewController.swift; sourceTree = "<group>"; };
@@ -208,6 +210,7 @@
 			children = (
 				4E3966F71F25DDBE0071EA7B /* ViewController.swift */,
 				4EA2460F1F2ED824008AD5C0 /* NewNoteViewController.swift */,
+				4E3365F01F72B046001634BC /* xxxViewController.swift */,
 				4E4AE1231F38465700B916F9 /* ContentViewController.swift */,
 				4E4AE1301F3AECC200B916F9 /* VoiceViewController.swift */,
 				4E4AE1311F3AECC200B916F9 /* VoiceViewController.xib */,
@@ -466,6 +469,7 @@
 				4EC1C16E1F53F5980006AF00 /* VoiceTableViewCell.swift in Sources */,
 				4E9361C91F42E50A001D04B0 /* RecorderTableViewCell.swift in Sources */,
 				4EE9F1D71F50210900044505 /* DisPlayTableViewController.swift in Sources */,
+				4E3365F11F72B046001634BC /* xxxViewController.swift in Sources */,
 				4E9361CE1F43D858001D04B0 /* ItemCollectionViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
