@@ -168,7 +168,8 @@ class NewNoteViewController: UIViewController, UITableViewDelegate, UITableViewD
                     self?.tableView.reloadRows(at: [indexPath], with: .fade)
                 }
             }
-            nextViewController.view.backgroundColor = UIColor.white
+//            nextViewController.view.backgroundColor = UIColor.white
+            
             nextViewController.textView.text = self.newNote.content
             self.navigationController?.pushViewController(nextViewController, animated: true)
         case indexName(.timeIndex):
@@ -199,7 +200,7 @@ class NewNoteViewController: UIViewController, UITableViewDelegate, UITableViewD
         
         self.timePicker.delegate = self
         
-        self.timePicker.frame = CGRect(x: 0, y: SCREEN_HEIGHT, width: SCREEN_WIDTH, height: SCREEN_HEIGHT)
+        self.timePicker.frame = CGRect(x: 0, y: cSCREEN_HEIGHT, width: cSCREEN_WIDTH, height: cSCREEN_HEIGHT)
         UIView.animate(withDuration: 0.6) {
             self.timePicker.snp.makeConstraints({ (make) in
                 make.edges.equalToSuperview()
@@ -233,7 +234,7 @@ class NewNoteViewController: UIViewController, UITableViewDelegate, UITableViewD
     
     func hiddenTimePicker() {
         UIView.animate(withDuration: 0.6, animations: {
-            self.timePicker.frame = CGRect(x: 0, y: SCREEN_HEIGHT, width: SCREEN_WIDTH, height: 300)
+            self.timePicker.frame = CGRect(x: 0, y: cSCREEN_HEIGHT, width: cSCREEN_WIDTH, height: 300)
         }) { (success) in
             self.timePicker.removeFromSuperview()
         }

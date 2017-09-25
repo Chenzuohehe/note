@@ -15,19 +15,22 @@ class ContentViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = "添加内容"
+        self.view.backgroundColor = noteColor(red: 240, green: 240, blue: 240)
+//        self.view.backgroundColor = UIColor.white
+//        let backView = UIView(frame: CGRect(x: 0.0, y: cNAVIGATION_HEIGHT, width: Double(cSCREEN_WIDTH), height: 208.0))
+        let backView = UIView(frame: CGRect(x: 0, y: cNAVIGATION_HEIGHT, width: cSCREEN_WIDTH, height: 208))
         
-        let backView = UIView(frame: CGRect(x: 0, y: 208 + 64, width: SCREEN_WIDTH, height: SCREEN_HEIGHT - 208))
-        backView.backgroundColor = noteColor(red: 123, green: 123, blue: 123)
+        backView.backgroundColor = UIColor.white
         self.view.addSubview(backView)
         
         self.view.addSubview(self.textView)
         self.textView.snp.makeConstraints { (make) in
-            make.top.equalTo(8 + 64)
+            make.top.equalTo(8 + cNAVIGATION_HEIGHT)
             make.left.equalTo(8)
             make.right.equalTo(-8)
             make.height.equalTo(200)
         }
-        self.textView.text = "123"
+//        self.textView.text = "123"
         self.textView.font = UIFont.systemFont(ofSize: 15)
         
         let rightBtn = UIBarButtonItem(title: "添加", style: .plain, target: self, action: #selector(confrimClick))
@@ -40,7 +43,7 @@ class ContentViewController: UIViewController {
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+        
     }
     
     typealias changContent = (String) ->()
@@ -51,7 +54,6 @@ class ContentViewController: UIViewController {
         if let handel = self.changText {
             handel(self.textView.text)
         }
-        
         self.navigationController?.popViewController(animated: true)
     }
 }

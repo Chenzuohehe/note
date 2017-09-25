@@ -29,7 +29,6 @@ class ViewController: UIViewController,FSCalendarDataSource, FSCalendarDelegate,
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.addGestureRecognizer(self.scopeGesture)
-        
         self.calendar.scope = .month
         self.calendar.appearance.eventDefaultColor = noteColor1
         
@@ -75,8 +74,7 @@ class ViewController: UIViewController,FSCalendarDataSource, FSCalendarDelegate,
         self.view.layoutIfNeeded()
     }
     func calendar(_ calendar: FSCalendar, numberOfEventsFor date: Date) -> Int {
-        print(date)
-        print(dayString(date))
+        
         for dayModel in days {
             if dayModel.dayDate == date {
                 return (dayModel.notes?.count)!
@@ -111,7 +109,7 @@ class ViewController: UIViewController,FSCalendarDataSource, FSCalendarDelegate,
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: (SCREEN_WIDTH - 30)/2, height: 80)
+        return CGSize(width: (cSCREEN_WIDTH - 30)/2, height: 80)
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
