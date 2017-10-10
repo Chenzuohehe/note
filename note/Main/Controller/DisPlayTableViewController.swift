@@ -57,7 +57,9 @@ class DisPlayTableViewController: UITableViewController {
         let mainStoryBoard = UIStoryboard(name: "Main", bundle: nil)
         let nextViewController = mainStoryBoard.instantiateViewController(withIdentifier: "newNote") as! NewNoteViewController
         
+        nextViewController.time = self.note.creatDate
         nextViewController.newNote = self.note
+        nextViewController.style = 1
         self.navigationController?.pushViewController(nextViewController, animated: true)
     }
 }

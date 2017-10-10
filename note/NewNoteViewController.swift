@@ -10,15 +10,10 @@ import UIKit
 import SnapKit
 
 class NewNoteViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, FSCalendarDataSource, FSCalendarDelegate, UIGestureRecognizerDelegate, UITextFieldDelegate, timePickerDelegate {
-
+    
     var time:Date?
-//    {
-//        get{
-//            if time != nil {
-//                return time
-//            }else if newNote.
-//        }
-//    }
+    var style:Int!
+    
     @IBOutlet weak var calendar: FSCalendar!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var calendarHight: NSLayoutConstraint!
@@ -32,6 +27,10 @@ class NewNoteViewController: UIViewController, UITableViewDelegate, UITableViewD
         case calendarIndex
         case voiceIndex
         case addressIndex
+    }
+    enum newNoteStyle:Int {
+        case creat = 0
+        case edit
     }
     
     func indexName(_ name:indexPathName) -> IndexPath {
@@ -48,19 +47,16 @@ class NewNoteViewController: UIViewController, UITableViewDelegate, UITableViewD
     }()
     
     
-    
-    
     let touch = UITapGestureRecognizer()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-//        print(time!)
-        
-//        let dayFormatter = DateFormatter()
-//        dayFormatter.setLocalizedDateFormatFromTemplate("MM/dd")
-//        let dayDate = dayFormatter.date(from: time)
-//        print(dayDate)
+
+        if self.style == 1 {
+            self.title = "编辑"
+        }else{
+            self.title = "新建"
+        }
         self.calendar.select(time)
         
         self.view.addGestureRecognizer(self.scopeGesture)
@@ -273,6 +269,9 @@ class NewNoteViewController: UIViewController, UITableViewDelegate, UITableViewD
     //判断days 里面是否有当前day
     
     func archiveNote() {
+        //判断是否有当前的note
+        var hasDayModel = false
+        let today = DayModel()
         var selectDay = Date()
         if (self.calendar.selectedDate != nil) {
             selectDay = self.calendar.selectedDate!
@@ -280,13 +279,26 @@ class NewNoteViewController: UIViewController, UITableViewDelegate, UITableViewD
             selectDay = self.calendar.today!
         }
         self.newNote.creatDay = dayString(selectDay)
-        
-        var hasDayModel = false
-        let today = DayModel()
+        if (self.time != nil) {
+            self.newNote.creatDate = self.time
+        }else{
+            self.newNote.creatDate = Date()
+        }
+//        self.newNote.creatDate = self.time
         
         for day in days {
             print(day.day!, dayString(time!))
             if day.day! == dayString(time!){
+                //这边要求如果有同一个note数据，那么就是更新
+                
+                var noteModels = [NoteModel]()
+                for note in (day.notes)!{
+                    if self.newNote.creatDate != note.creatDate {
+                        noteModels.append(note)
+                    }
+                }
+                day.notes = noteModels
+                
                 hasDayModel = true
                 day.notes!.append(self.newNote)
             }
@@ -298,7 +310,8 @@ class NewNoteViewController: UIViewController, UITableViewDelegate, UITableViewD
             days.append(today)
         }
         archiverDays(days)
-        self.navigationController?.popViewController(animated: true)
+//        self.navigationController?.popViewController(animated: true)
+        self.navigationController?.popToRootViewController(animated: true)
     }
 }
 

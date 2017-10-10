@@ -62,7 +62,8 @@ class NoteModel: NSObject , NSCoding{
     }
     
     override init(){
-        
+        self.creatDate = Date()
+        self.creatDay = dayString(Date())
     }
 }
 

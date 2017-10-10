@@ -82,7 +82,7 @@
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="晚上计划跑五公里，然后五十个俯卧撑晚上计划跑五公里，然后五十个俯卧撑晚上计划跑五公里，然后五十个俯卧撑晚上计划跑五公里，然后五十个俯卧撑晚上计划跑五公里，然后五十个俯卧撑" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Fwp-Od-icJ">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="晚上计划跑五公里" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Fwp-Od-icJ">
                                                     <rect key="frame" x="8" y="38" width="137" height="51"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                     <nil key="textColor"/>
@@ -101,12 +101,12 @@
                                         </view>
                                         <color key="backgroundColor" red="0.40000000600000002" green="0.80000001190000003" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
-                                            <constraint firstAttribute="trailing" secondItem="Fwp-Od-icJ" secondAttribute="trailing" constant="8" id="8Ks-eB-xSa"/>
+                                            <constraint firstAttribute="bottom" secondItem="Fwp-Od-icJ" secondAttribute="bottom" constant="4" id="4pa-7l-RgG"/>
                                             <constraint firstAttribute="trailing" secondItem="nUq-04-znp" secondAttribute="trailing" constant="8" id="9kM-Ml-2aY"/>
-                                            <constraint firstAttribute="bottom" secondItem="Fwp-Od-icJ" secondAttribute="bottom" constant="4" id="J4a-F1-KUj"/>
-                                            <constraint firstItem="Fwp-Od-icJ" firstAttribute="top" secondItem="uEZ-iV-bb1" secondAttribute="bottom" id="Jhx-o9-XTs"/>
+                                            <constraint firstAttribute="trailing" secondItem="Fwp-Od-icJ" secondAttribute="trailing" constant="8" id="Dek-2U-0tY"/>
+                                            <constraint firstItem="Fwp-Od-icJ" firstAttribute="leading" secondItem="qVI-5G-otM" secondAttribute="leading" constant="8" id="DwX-zj-gSR"/>
                                             <constraint firstAttribute="trailing" secondItem="uEZ-iV-bb1" secondAttribute="trailing" constant="8" id="c5w-Cu-93j"/>
-                                            <constraint firstItem="Fwp-Od-icJ" firstAttribute="leading" secondItem="qVI-5G-otM" secondAttribute="leading" constant="8" id="jPQ-m6-5lo"/>
+                                            <constraint firstItem="Fwp-Od-icJ" firstAttribute="top" secondItem="uEZ-iV-bb1" secondAttribute="bottom" id="dUp-ye-1qj"/>
                                             <constraint firstItem="uEZ-iV-bb1" firstAttribute="leading" secondItem="qVI-5G-otM" secondAttribute="leading" constant="8" id="lqd-eb-K5n"/>
                                             <constraint firstItem="nUq-04-znp" firstAttribute="top" secondItem="qVI-5G-otM" secondAttribute="top" id="p9k-qp-92S"/>
                                             <constraint firstItem="uEZ-iV-bb1" firstAttribute="top" secondItem="nUq-04-znp" secondAttribute="bottom" id="qc5-vY-w4r"/>
@@ -434,7 +434,7 @@
                             <constraint firstAttribute="trailing" secondItem="pmm-il-JDb" secondAttribute="trailing" id="v7p-U5-N8f"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="新建" id="9Pv-cg-tH7">
+                    <navigationItem key="navigationItem" id="9Pv-cg-tH7">
                         <barButtonItem key="rightBarButtonItem" title="保存" id="PaE-mT-H0r">
                             <connections>
                                 <action selector="saveNewNote:" destination="0RN-Jo-cli" id="1jh-jM-d2t"/>

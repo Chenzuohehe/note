@@ -125,7 +125,7 @@ class ViewController: UIViewController,FSCalendarDataSource, FSCalendarDelegate,
         cell.dayLabel.text = noteModel?.creatDay
         cell.titleLabel.text = noteModel?.title
         cell.contentLabel.text = noteModel?.content
-        cell.contentLabel.sizeToFit()
+//        cell.contentLabel.sizeToFit()
         return cell
     }
     
