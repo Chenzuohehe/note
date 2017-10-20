@@ -11,7 +11,19 @@ import SnapKit
 
 class NewNoteViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, FSCalendarDataSource, FSCalendarDelegate, UIGestureRecognizerDelegate, UITextFieldDelegate, timePickerDelegate {
     
-    var time:Date?
+    fileprivate var _time:Date?
+    var time:Date?{
+        get{
+            if _time != nil{
+                return _time
+            }
+            _time = Date()
+            return _time
+        }
+        set{
+            self._time = newValue
+        }
+    }
     var style:Int!
     
     @IBOutlet weak var calendar: FSCalendar!
@@ -52,6 +64,8 @@ class NewNoteViewController: UIViewController, UITableViewDelegate, UITableViewD
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        print(self.time!)
+        
         if self.style == 1 {
             self.title = "编辑"
         }else{
@@ -174,6 +188,7 @@ class NewNoteViewController: UIViewController, UITableViewDelegate, UITableViewD
             print("语音")
             
             let nextViewController = VoiceViewController(nibName: "VoiceViewController", bundle: nil)
+            nextViewController.pathUrl = self.newNote.voiceURL
             nextViewController.voiceBack = { [weak self] (name:String, url:URL) ->() in
                 if let weakself = self {
                     weakself.newNote.voiceName = name
@@ -220,8 +235,8 @@ class NewNoteViewController: UIViewController, UITableViewDelegate, UITableViewD
                 selectDay = self.calendar.today!
             }
             
-            let time = timeString(startTime, endTime, selectDay)
-            timeCell.detailTimeLabel.text = time
+            let timeStr = timeString(startTime, endTime, selectDay)
+            timeCell.detailTimeLabel.text = timeStr
             
             self.newNote.startDate = startTime
             self.newNote.endDate = endTime
@@ -279,12 +294,7 @@ class NewNoteViewController: UIViewController, UITableViewDelegate, UITableViewD
             selectDay = self.calendar.today!
         }
         self.newNote.creatDay = dayString(selectDay)
-        if (self.time != nil) {
-            self.newNote.creatDate = self.time
-        }else{
-            self.newNote.creatDate = Date()
-        }
-//        self.newNote.creatDate = self.time
+        self.newNote.creatDate = self.time
         
         for day in days {
             print(day.day!, dayString(time!))

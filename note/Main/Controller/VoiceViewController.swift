@@ -23,13 +23,24 @@ class VoiceViewController: UIViewController, AVAudioPlayerDelegate {
     var progressTimer:Timer?
     
     var recordingName = String()
-    var url:URL!
-    var oldUrl:URL?
     
+    fileprivate var _pathUrl:URL?
+    var pathUrl:URL?{
+        set{
+            _pathUrl = newValue
+        }
+        get{
+            if (_pathUrl != nil) {
+                return _pathUrl
+            }
+            _pathUrl = self.directoryURL()!
+            return _pathUrl
+        }
+    }
+    var oldUrl:URL?
     
     typealias addVoice = (String, URL) -> ()
     var voiceBack:addVoice?
-    
     
     @IBOutlet weak var timeLabel: UILabel!
     
@@ -51,12 +62,13 @@ class VoiceViewController: UIViewController, AVAudioPlayerDelegate {
         recordingName = formatter.string(from: currentDateTime)+".caf"
         print(recordingName)
         
+        //
         let fileManager = FileManager.default
         let urls = fileManager.urls(for: .documentDirectory, in: .userDomainMask)
         let documentDirectory = urls[0] as URL
         let soundURL = documentDirectory.appendingPathComponent(recordingName)
-        url = soundURL
-        return soundURL
+        self.pathUrl = soundURL
+        return self.pathUrl
     }
     
     override func viewDidLoad() {
@@ -64,17 +76,21 @@ class VoiceViewController: UIViewController, AVAudioPlayerDelegate {
         
         authorized = false
         //detection()//验证是否允许使用麦克风
-        //初始化recorder
+//        if self.pathUrl == nil {
+//            self.pathUrl = self.directoryURL()!
+//        }
         readyForRecorder()
         
-        if self.oldUrl != nil {
-            //之前有录音
-            //播放器播放之前的录音 显示之前录音的时长？
-            //录音点击删除之前的录音，重新录音
-            
-        }else{
-            //之前没有 正常运行
-        }
+//        if self.pathUrl != nil {
+//            //之前有录音
+//            //播放器播放之前的录音 显示之前录音的时长？
+//            //录音点击删除之前的录音，重新录音
+//
+//        }else{
+//            //之前没有 正常运行
+//            //初始化recorder
+//
+//        }
         
         let rightBtn = UIBarButtonItem(title: "确认添加", style: .plain, target: self, action: #selector(confrimClick))
         self.navigationItem.rightBarButtonItem = rightBtn
@@ -87,7 +103,7 @@ class VoiceViewController: UIViewController, AVAudioPlayerDelegate {
         if authorized {
             if audioRecorder.currentTime <= 0 {
                 do {
-                    try FileManager.default.removeItem(at: url)
+                    try FileManager.default.removeItem(at: self.pathUrl!)
                 } catch  {
                 }
             }
@@ -113,13 +129,13 @@ class VoiceViewController: UIViewController, AVAudioPlayerDelegate {
         }
     }
     
-    
     func readyForRecorder() {
         //初始化recorder
+        
         let audioSession = AVAudioSession.sharedInstance()
         do {
             try audioSession.setCategory(AVAudioSessionCategoryPlayAndRecord)
-            try audioRecorder = AVAudioRecorder(url: self.directoryURL()!,
+            try audioRecorder = AVAudioRecorder(url: self.pathUrl!,
                                                 settings: recordSettings)//初始化实例
             audioRecorder.isMeteringEnabled = true
             audioRecorder.prepareToRecord()//准备录音
@@ -226,8 +242,8 @@ class VoiceViewController: UIViewController, AVAudioPlayerDelegate {
     
     func confrimClick() {
         if audioRecorder.currentTime > 0 ,let handle = self.voiceBack{
-            print(self.url, self.recordingName)
-            handle(self.recordingName, self.url)
+            print(self.pathUrl!, self.recordingName)
+            handle(self.recordingName, self.pathUrl!)
             self.navigationController?.popViewController(animated: true)
         }else{
             makePost("请先录音", self.view)
@@ -260,7 +276,7 @@ class VoiceViewController: UIViewController, AVAudioPlayerDelegate {
     
     @IBAction func refresh(_ sender: Any) {
         do {
-            try FileManager.default.removeItem(at: url)
+            try FileManager.default.removeItem(at: self.pathUrl!)
         } catch  {
         }
         readyForRecorder()
