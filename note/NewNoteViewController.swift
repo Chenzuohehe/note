@@ -320,7 +320,6 @@ class NewNoteViewController: UIViewController, UITableViewDelegate, UITableViewD
             days.append(today)
         }
         archiverDays(days)
-//        self.navigationController?.popViewController(animated: true)
         self.navigationController?.popToRootViewController(animated: true)
     }
 }

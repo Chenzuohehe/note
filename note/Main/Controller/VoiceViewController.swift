@@ -37,7 +37,6 @@ class VoiceViewController: UIViewController, AVAudioPlayerDelegate {
             return _pathUrl
         }
     }
-    var oldUrl:URL?
     
     typealias addVoice = (String, URL) -> ()
     var voiceBack:addVoice?
@@ -76,21 +75,7 @@ class VoiceViewController: UIViewController, AVAudioPlayerDelegate {
         
         authorized = false
         //detection()//验证是否允许使用麦克风
-//        if self.pathUrl == nil {
-//            self.pathUrl = self.directoryURL()!
-//        }
         readyForRecorder()
-        
-//        if self.pathUrl != nil {
-//            //之前有录音
-//            //播放器播放之前的录音 显示之前录音的时长？
-//            //录音点击删除之前的录音，重新录音
-//
-//        }else{
-//            //之前没有 正常运行
-//            //初始化recorder
-//
-//        }
         
         let rightBtn = UIBarButtonItem(title: "确认添加", style: .plain, target: self, action: #selector(confrimClick))
         self.navigationItem.rightBarButtonItem = rightBtn
@@ -130,8 +115,7 @@ class VoiceViewController: UIViewController, AVAudioPlayerDelegate {
     }
     
     func readyForRecorder() {
-        //初始化recorder
-        
+        //初始化recorde
         let audioSession = AVAudioSession.sharedInstance()
         do {
             try audioSession.setCategory(AVAudioSessionCategoryPlayAndRecord)
@@ -169,17 +153,22 @@ class VoiceViewController: UIViewController, AVAudioPlayerDelegate {
         
         if audioPlayer.duration > 0{
             let progress = audioPlayer.currentTime / audioPlayer.duration
+            print("111", progress)
             playProgressView.setProgress(Float(progress), animated: true)
+            if progress >= 0.99{
+                progressTimer?.invalidate()
+            }
         }
     }
     
     //进度条
     func audioPlayerDidFinishPlaying(_ player: AVAudioPlayer, successfully flag: Bool) {
+        
+        playProgressView.progress = 0
         playButton.isSelected = !playButton.isSelected
-        playProgressView.setProgress(0, animated: false)
     }
     
-    func stop() {
+    func recorderStop() {
         //停止录音
         let audioSession = AVAudioSession.sharedInstance()
         do {
@@ -190,14 +179,13 @@ class VoiceViewController: UIViewController, AVAudioPlayerDelegate {
         }
     }
     
-    func start() {
+    func recorderStart() {
         //开始录音
         if !audioRecorder.isRecording {
             let audioSession = AVAudioSession.sharedInstance()
             do {
                 try audioSession.setActive(true)
                 audioRecorder.record()
-                self.oldUrl = nil
                 print("record!")
             } catch {
             }
@@ -205,29 +193,27 @@ class VoiceViewController: UIViewController, AVAudioPlayerDelegate {
     }
     
     //开始播放
-    func play() {
+    func playerPlay() {
         //暂停录音
         if (audioRecorder.isRecording){
             startButton.isSelected = !startButton.isSelected
         }
         audioRecorder.stop()
-        do {
-            if self.oldUrl != nil {
-                try audioPlayer = AVAudioPlayer(contentsOf: self.oldUrl!)
-            }else{
-                try audioPlayer = AVAudioPlayer(contentsOf: audioRecorder.url)
+        if audioPlayer == nil {
+            do {
+                try audioPlayer = AVAudioPlayer(contentsOf: self.pathUrl!)
+                audioPlayer.delegate = self
+            } catch {
             }
-            
-            audioPlayer.play()
-            audioPlayer.delegate = self
-            progressTimer = Timer.scheduledTimer(timeInterval: 0.01, target: self, selector: #selector(progressShow), userInfo: nil, repeats: true)
-            progressTimer?.fire()
-            print("play!!")
-        } catch {
         }
+        audioPlayer.play()
+        progressTimer = Timer.scheduledTimer(timeInterval: 0.01, target: self, selector: #selector(progressShow), userInfo: nil, repeats: true)
+        progressTimer?.fire()
+        print("play!!")
     }
     
-    func pause() {
+    func playerPause() {
+        progressTimer?.invalidate()
         //暂停播放
         if (!audioRecorder.isRecording){
             do {
@@ -241,6 +227,8 @@ class VoiceViewController: UIViewController, AVAudioPlayerDelegate {
     }
     
     func confrimClick() {
+        print(audioRecorder.currentTime)
+        print(self.pathUrl!, self.recordingName)
         if audioRecorder.currentTime > 0 ,let handle = self.voiceBack{
             print(self.pathUrl!, self.recordingName)
             handle(self.recordingName, self.pathUrl!)
@@ -251,24 +239,24 @@ class VoiceViewController: UIViewController, AVAudioPlayerDelegate {
     }
     
     //MARK:- action 点击
-    
     @IBAction func recordingClick(_ sender: UIButton) {
         
         if sender.isSelected {
-            stop()
+            recorderStop()
         }else{
-            start()
+            recorderStart()
         }
         sender.isSelected = !sender.isSelected
     }
     
     @IBAction func playClick(_ sender: UIButton) {
         if sender.isSelected {
-            pause()
+            playerPause()
             sender.isSelected = !sender.isSelected
         }else{
-            if audioRecorder.currentTime > 0 || self.oldUrl != nil{
-                play()
+            if audioRecorder.currentTime > 0 || self.pathUrl != nil{
+                playProgressView.setProgress(0, animated: false)
+                playerPlay()
                 sender.isSelected = !sender.isSelected
             }
         }
