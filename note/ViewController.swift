@@ -30,6 +30,7 @@ class ViewController: UIViewController,FSCalendarDataSource, FSCalendarDelegate,
         super.viewDidLoad()
         self.view.addGestureRecognizer(self.scopeGesture)
         self.calendar.scope = .month
+        self.calendar.locale = Locale(identifier: "zh_CN")
         self.calendar.appearance.eventDefaultColor = noteColor1
         
         reloadCollection(Date())

@@ -72,6 +72,7 @@ class NewNoteViewController: UIViewController, UITableViewDelegate, UITableViewD
             self.title = "新建"
         }
         self.calendar.select(time)
+        self.calendar.locale = Locale(identifier: "zh_CN")
         
         self.view.addGestureRecognizer(self.scopeGesture)
         self.tableView.panGestureRecognizer.require(toFail: self.scopeGesture)
