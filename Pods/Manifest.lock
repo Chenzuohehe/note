@@ -1,18 +1,28 @@
 PODS:
+  - EZAudio (1.1.5):
+    - EZAudio/Full (= 1.1.5)
+  - EZAudio/Core (1.1.5)
+  - EZAudio/Full (1.1.5):
+    - EZAudio/Core
+    - TPCircularBuffer (= 1.1)
   - FSCalendar (2.7.9)
   - MBProgressHUD (1.0.0)
   - SnapKit (3.1.2)
+  - TPCircularBuffer (1.1)
 
 DEPENDENCIES:
+  - EZAudio (~> 1.1.5)
   - FSCalendar (~> 2.7.9)
   - MBProgressHUD (~> 1.0.0)
   - SnapKit (~> 3.1.2)
 
 SPEC CHECKSUMS:
+  EZAudio: 3b1cb4b6d7ebca68f0c2478576d75940aad4aa99
   FSCalendar: a04b09f16f811bc92e82f3cf852a15225233b9d5
   MBProgressHUD: 4890f671c94e8a0f3cf959aa731e9de2f036d71a
   SnapKit: 12b24f569cb7c143acc9c22b9d91b23e7b1c84a2
+  TPCircularBuffer: 4960a919e667280f7f38963d771f45871b64fe62
 
-PODFILE CHECKSUM: f4b785df2b9cbc97a48fae1eca4b06cdaca791a2
+PODFILE CHECKSUM: 8f429bdebdb918bf4176bf946f0104809578df29
 
 COCOAPODS: 1.2.0
