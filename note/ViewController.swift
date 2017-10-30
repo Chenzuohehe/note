@@ -110,7 +110,7 @@ class ViewController: UIViewController,FSCalendarDataSource, FSCalendarDelegate,
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: (cSCREEN_WIDTH - 30)/2, height: 80)
+        return CGSize(width: (cSCREEN_WIDTH - 30)/2, height: 90)
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {

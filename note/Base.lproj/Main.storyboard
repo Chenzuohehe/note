@@ -74,24 +74,24 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="晚上去跑步" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uEZ-iV-bb1">
-                                                    <rect key="frame" x="8" y="20" width="137" height="18"/>
+                                                    <rect key="frame" x="8" y="30" width="137" height="30"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="height" constant="18" id="cOu-I5-gdV"/>
+                                                        <constraint firstAttribute="height" constant="30" id="cOu-I5-gdV"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="晚上计划跑五公里" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Fwp-Od-icJ">
-                                                    <rect key="frame" x="8" y="38" width="137" height="51"/>
+                                                    <rect key="frame" x="8" y="60" width="137" height="29"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="还有34分钟 截止" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nUq-04-znp">
-                                                    <rect key="frame" x="8" y="0.0" width="137" height="20"/>
+                                                    <rect key="frame" x="8" y="0.0" width="137" height="30"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="height" constant="20" id="hz5-DJ-2Fg"/>
+                                                        <constraint firstAttribute="height" constant="30" id="hz5-DJ-2Fg"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <nil key="textColor"/>
@@ -383,12 +383,12 @@
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BJJ-Yk-NhE">
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BJJ-Yk-NhE">
                                                     <rect key="frame" x="325" y="0.0" width="50" height="50"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="50" id="fCm-bu-z2o"/>
                                                     </constraints>
-                                                    <state key="normal" title="play">
+                                                    <state key="normal" image="playButton">
                                                         <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                                     </state>
                                                 </button>
@@ -515,6 +515,9 @@
             <point key="canvasLocation" x="673" y="-487"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="playButton" width="20" height="20"/>
+    </resources>
     <inferredMetricsTieBreakers>
         <segue reference="uNa-UY-kRb"/>
     </inferredMetricsTieBreakers>

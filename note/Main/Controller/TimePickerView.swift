@@ -15,6 +15,7 @@ import UIKit
 class TimePickerView: UIView, UIPickerViewDataSource, UIPickerViewDelegate {
     @IBOutlet weak var startDatePicker: UIPickerView!
     @IBOutlet weak var endDatePicker: UIPickerView!
+    @IBOutlet weak var alphaBackView: UIView!
     
     var timeString = String()
     var startTimeString:String?

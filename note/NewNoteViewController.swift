@@ -203,17 +203,20 @@ class NewNoteViewController: UIViewController, UITableViewDelegate, UITableViewD
     }
     
     let timePicker = Bundle.main.loadNibNamed("TimePickerView", owner: nil, options: nil)?.last as! TimePickerView
+    let backGrayView = UIView(frame: CGRect(x: 0, y: 0, width: cSCREEN_WIDTH, height: cSCREEN_HEIGHT))
     
     func showTimePicker() {
-
+        self.view.addSubview(backGrayView)
+        backGrayView.alpha = 0
+        backGrayView.backgroundColor = UIColor.gray
+        
         self.view.addSubview(self.timePicker)
         let toucTap = UITapGestureRecognizer(target: self, action: #selector(hiddenTimePicker))
         self.timePicker.addGestureRecognizer(toucTap)
-        
         self.timePicker.delegate = self
-        
         self.timePicker.frame = CGRect(x: 0, y: cSCREEN_HEIGHT, width: cSCREEN_WIDTH, height: cSCREEN_HEIGHT)
         UIView.animate(withDuration: 0.6) {
+            self.backGrayView.alpha = 0.5
             self.timePicker.snp.makeConstraints({ (make) in
                 make.edges.equalToSuperview()
             })
@@ -245,9 +248,12 @@ class NewNoteViewController: UIViewController, UITableViewDelegate, UITableViewD
     }
     
     func hiddenTimePicker() {
+        
         UIView.animate(withDuration: 0.6, animations: {
+            self.backGrayView.alpha = 0
             self.timePicker.frame = CGRect(x: 0, y: cSCREEN_HEIGHT, width: cSCREEN_WIDTH, height: 300)
         }) { (success) in
+            self.backGrayView.removeFromSuperview()
             self.timePicker.removeFromSuperview()
         }
     }
