@@ -5,7 +5,7 @@ def pods
     pod 'SnapKit', '~> 3.1.2'
     pod 'FSCalendar’, '~> 2.7.9'
     pod 'MBProgressHUD', '~> 1.0.0'
-    pod 'EZAudio', '~> 1.1.5'
+    pod 'EZAudio/Core', '~> 1.1.4'
 end
 
 target 'note' do

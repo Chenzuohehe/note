@@ -31,7 +31,7 @@ class ViewController: UIViewController,FSCalendarDataSource, FSCalendarDelegate,
         self.view.addGestureRecognizer(self.scopeGesture)
         self.calendar.scope = .month
         self.calendar.locale = Locale(identifier: "zh_CN")
-        self.calendar.appearance.eventDefaultColor = noteColor1
+        self.calendar.appearance.eventDefaultColor = UIColor(red: 196/255.0, green: 225/255.0, blue: 137/255.0, alpha: 1)
         
         reloadCollection(Date())
         
@@ -110,7 +110,7 @@ class ViewController: UIViewController,FSCalendarDataSource, FSCalendarDelegate,
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: (cSCREEN_WIDTH - 30)/2, height: 90)
+        return CGSize(width: (cSCREEN_WIDTH - 30)/2, height: 100)
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {

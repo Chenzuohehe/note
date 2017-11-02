@@ -19,7 +19,7 @@ class TextTableViewCell: UITableViewCell {
     }()
     let timeLabel:UILabel = {
         let label = UILabel()
-        label.font = UIFont.systemFont(ofSize: 13)
+        label.font = UIFont.systemFont(ofSize: 15)
         return label
     }()
     let contentLabel:UILabel = {
@@ -67,20 +67,21 @@ class TextTableViewCell: UITableViewCell {
         self.contentView.addSubview(self.contentLabel)
         
         
-        
-        self.titleLable.snp.makeConstraints { (make) in
+        self.timeLabel.snp.makeConstraints { (make) in
             make.left.top.equalTo(self.contentView).offset(8)
             make.right.equalTo(self.contentView).offset(-8)
         }
-        self.timeLabel.snp.makeConstraints { (make) in
+        self.titleLable.snp.makeConstraints { (make) in
             make.left.equalTo(self.contentView).offset(8)
             make.right.equalTo(self.contentView).offset(-8)
-            make.top.equalTo(self.titleLable.snp.bottom).offset(8)
-        }
-        self.contentLabel.snp.makeConstraints { (make) in
-            make.left.equalTo(self.contentView).offset(8)
-            make.right.bottom.equalTo(self.contentView).offset(-8)
             make.top.equalTo(self.timeLabel.snp.bottom).offset(8)
+        }
+        self.titleLable.textAlignment = .center
+        
+        self.contentLabel.snp.makeConstraints { (make) in
+            make.left.equalTo(self.contentView).offset(18)
+            make.right.bottom.equalTo(self.contentView).offset(-18)
+            make.top.equalTo(self.titleLable.snp.bottom).offset(18)
         }
         
     }

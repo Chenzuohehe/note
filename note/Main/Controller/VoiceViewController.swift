@@ -9,7 +9,11 @@
 import UIKit
 import AVFoundation
 
-class VoiceViewController: UIViewController, AVAudioPlayerDelegate {
+class VoiceViewController: UIViewController, AVAudioPlayerDelegate,EZMicrophoneDelegate {
+    
+    @IBOutlet weak var audioPlot: EZAudioPlot!
+    var microphone: EZMicrophone!
+    var inputs : NSArray!
     
     @IBOutlet weak var playButton: UIButton!
     @IBOutlet weak var startButton: UIButton!
@@ -83,6 +87,34 @@ class VoiceViewController: UIViewController, AVAudioPlayerDelegate {
         
         let rightBtn = UIBarButtonItem(title: "确认添加", style: .plain, target: self, action: #selector(confrimClick))
         self.navigationItem.rightBarButtonItem = rightBtn
+        
+        self.audioPlot.plotType = .rolling
+        self.audioPlot.shouldFill = true
+        self.audioPlot.shouldMirror = true
+        self.audioPlot.gain = 0.6
+        self.audioPlot.backgroundColor = noteColor(red: 0.7, green: 0.7, blue: 0.7)
+//        self.audioPlot.color = noteColor(red: 1, green: 1, blue: 1)
+        self.microphone = EZMicrophone.init(microphoneDelegate: self)
+        self.inputs = EZAudioDevice.inputDevices()! as NSArray
+        self.microphone.startFetchingAudio()
+    }
+    
+    func microphone(_ microphone: EZMicrophone!, hasAudioReceived buffer: UnsafeMutablePointer<UnsafeMutablePointer<Float>?>!, withBufferSize bufferSize: UInt32, withNumberOfChannels numberOfChannels: UInt32) {
+        DispatchQueue.global().async {
+            // code
+            DispatchQueue.main.async {
+                // 主线程中
+                self.audioPlot.updateBuffer(buffer[0], withBufferSize: bufferSize * 2)
+            }
+        }
+    }
+    
+    func microphone(_ microphone: EZMicrophone!, hasAudioStreamBasicDescription audioStreamBasicDescription: AudioStreamBasicDescription) {
+        EZAudioUtilities.printASBD(audioStreamBasicDescription)
+    }
+    
+    func microphone(_ microphone: EZMicrophone!, hasBufferList bufferList: UnsafeMutablePointer<AudioBufferList>!, withBufferSize bufferSize: UInt32, withNumberOfChannels numberOfChannels: UInt32) {
+        
     }
     
     override func viewWillDisappear(_ animated: Bool) {

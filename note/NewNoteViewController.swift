@@ -142,6 +142,7 @@ class NewNoteViewController: UIViewController, UITableViewDelegate, UITableViewD
                 cell.textLabel?.text = "内容"
             }else{
                 cell.textLabel?.text = self.newNote.content
+                cell.textLabel?.textColor = noteGray
             }
             return cell
         case indexName(.timeIndex):
@@ -179,8 +180,6 @@ class NewNoteViewController: UIViewController, UITableViewDelegate, UITableViewD
                     self?.tableView.reloadRows(at: [indexPath], with: .fade)
                 }
             }
-//            nextViewController.view.backgroundColor = UIColor.white
-            
             nextViewController.textView.text = self.newNote.content
             self.navigationController?.pushViewController(nextViewController, animated: true)
         case indexName(.timeIndex):
